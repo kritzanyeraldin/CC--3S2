@@ -3,7 +3,7 @@
 <!-- UL-->
  * Creamos la primera prueba en la clase Calculator Test. 
 
- ![calculatortest](imagenes/1.png)
+ ![calculatortest](Activida-Refactorizacion/imagenes/1.png)
 
  * Ahora escribimos codigo en la clase Calculadora, la cual hara que la prueba sea verdadera
 
