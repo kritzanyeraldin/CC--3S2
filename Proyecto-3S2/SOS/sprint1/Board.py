@@ -1,7 +1,5 @@
-class board:
-    # Definir las dimensiones del tablero y el tamaño de cada celda
-    BOARD_SIZE = 3
-    CELL_SIZE = 100
-
-    # Crear el tablero
-    board = [[None for i in range(BOARD_SIZE)] for j in range(BOARD_SIZE)]
+class Board:
+    def __init__(self):
+        self.board_size = 3
+        self.cell_size = 100
+        self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]

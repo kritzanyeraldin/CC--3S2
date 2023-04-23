@@ -1,5 +1,6 @@
 import pygame
 import sys
+from Board import Board
 
 
 class Game(pygame.Surface):
@@ -11,15 +12,14 @@ class Game(pygame.Surface):
         self.height = height
 
     def drawBoard(self):
-        BOARD_SIZE = 3
-        CELL_SIZE = 100
-        WHITE = (255, 255, 255)
-        for row in range(BOARD_SIZE):
-            for col in range(BOARD_SIZE):
-                rect = pygame.Rect(col * CELL_SIZE + (self.width - BOARD_SIZE * CELL_SIZE)/2,
-                                   row * CELL_SIZE + (self.height - BOARD_SIZE * CELL_SIZE)/2,
-                                   CELL_SIZE, CELL_SIZE)
-                pygame.draw.rect(self, WHITE, rect, 2)
+        board = Board()
+        white = (255, 255, 255)
+        for row in range(board.board_size):
+            for col in range(board.board_size):
+                rect = pygame.Rect(col * board.cell_size + (self.width - board.board_size * board.cell_size) / 2,
+                                   row * board.cell_size + (self.height - board.board_size * board.cell_size) / 2,
+                                   board.cell_size, board.cell_size)
+                pygame.draw.rect(self, white, rect, 2)
         pygame.display.get_surface().blit(self, (0, 0))
 
     def run(self):
