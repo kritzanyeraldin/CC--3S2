@@ -121,39 +121,89 @@ class Container2(tk.Frame):
 
         print(f'inicio: {self.board.board}')
 
-        value = self.redValue.get()
-        value = self.blueValue.get()
-
+        piece = None
+        piece = self.piece()
 
         if self.board.board[row][col] is None:
-            if value == 1:
-                self.board.insert_piece(row, col, 'S')
-                self.canvas.create_text(
-                    (col + 0.5) * self.cell_size,
-                    (row + 0.5) * self.cell_size,
-                    text='S',
-                    font=('Arial', 32),
-                    fill='red'
-                )
-                self.S_red_player.deselect()
-            elif value == 0:
-                self.board.insert_piece(row, col, 'O')
-                self.canvas.create_text(
-                    (col + 0.5) * self.cell_size,
-                    (row + 0.5) * self.cell_size,
-                    text='O',
-                    font=('Arial', 32),
-                    fill='red'
-                )
-                self.O_red_player.deselect()
+            if self.valueTurn.get() == 'red':
+                if piece == 'S':
+                    self.board.insert_piece(row, col, piece)
+                    self.canvas.create_text(
+                        (col + 0.5) * self.cell_size,
+                        (row + 0.5) * self.cell_size,
+                        text='S',
+                        font=('Arial', 32),
+                        fill='red'
+                        )
+                    self.S_red_player.deselect()
+                elif piece == 'O':
+                    self.board.insert_piece(row, col, piece)
+                    self.canvas.create_text(
+                        (col + 0.5) * self.cell_size,
+                        (row + 0.5) * self.cell_size,
+                        text='O',
+                        font=('Arial', 32),
+                        fill='red'
+                        )
+                    self.O_red_player.deselect()
 
-        self.redValue.set(None)
-        self.blueValue.set(None)
+            if self.valueTurn.get() == 'blue':
+                if piece == 'S':
+                    self.board.insert_piece(row, col, piece)
+                    self.canvas.create_text(
+                        (col + 0.5) * self.cell_size,
+                        (row + 0.5) * self.cell_size,
+                        text='S',
+                        font=('Arial', 32),
+                        fill='blue'
+                        )
+                    self.S_blue_player.deselect()
+                elif piece == 'O':
+                    self.board.insert_piece(row, col, piece)
+                    self.canvas.create_text(
+                        (col + 0.5) * self.cell_size,
+                        (row + 0.5) * self.cell_size,
+                        text='O',
+                        font=('Arial', 32),
+                        fill='blue'
+                        )
+                    self.O_blue_player.deselect()
+
+        self.turn()
 
         print(f'final: {self.board.board}')
 
     def turn(self):
-        pass
+        if self.valueTurn.get() == 'red':
+
+            self.S_blue_player.config(state='normal')
+            self.O_blue_player.config(state='normal')
+            self.S_red_player.config(state='disabled')
+            self.O_red_player.config(state='disabled')
+            self.valueTurn.set('blue')
+
+        else:
+
+            self.S_blue_player.config(state='disabled')
+            self.O_blue_player.config(state='disabled')
+            self.S_red_player.config(state='normal')
+            self.O_red_player.config(state='normal')
+            self.valueTurn.set('red')
+
+
+    def piece(self):
+        if (self.redValue.get() == 'S') or (self.blueValue.get() == 'S'):
+            piece = 'S'
+        elif (self.redValue.get() == 'O') or (self.blueValue.get() == 'O'):
+            piece = 'O'
+        else:
+            piece = None
+
+        self.redValue.set(None)
+        self.blueValue.set(None)
+        return piece
+
+
 
     def init_widgets(self):
 
@@ -182,11 +232,11 @@ class Container2(tk.Frame):
         label_human = tk.Label(self.frame_blue_player, text='Human')
         label_human.place(x=30, y=100, width=100, height=30)
 
-        self.blueValue = tk.IntVar()
+        self.blueValue = tk.StringVar()
         self.blueValue.set(None)
-        self.S_blue_player = tk.Radiobutton(self.frame_blue_player, text='S', variable=self.blueValue, value=1)
+        self.S_blue_player = tk.Radiobutton(self.frame_blue_player, text='S', variable=self.blueValue, value='S', state='disabled')
         self.S_blue_player.place(x=50, y=150, width=100, height=30)
-        self.O_blue_player = tk.Radiobutton(self.frame_blue_player, text='O', variable=self.blueValue, value=0)
+        self.O_blue_player = tk.Radiobutton(self.frame_blue_player, text='O', variable=self.blueValue, value='O',state='disabled')
         self.O_blue_player.place(x=50, y=200, width=100, height=30)
 
         ##
@@ -197,11 +247,11 @@ class Container2(tk.Frame):
         label_human = tk.Label(self.frame_red_player, text='Human')
         label_human.place(x=30, y=100, width=100, height=30)
 
-        self.redValue = tk.IntVar()
-        self.blueValue.set(None)
-        self.S_red_player = tk.Radiobutton(self.frame_red_player, text='S', variable=self.redValue, value=1)
+        self.redValue = tk.StringVar()
+        self.redValue.set(None)
+        self.S_red_player = tk.Radiobutton(self.frame_red_player, text='S', variable=self.redValue, value='S')
         self.S_red_player.place(x=50, y=150, width=100, height=30)
-        self.O_red_player = tk.Radiobutton(self.frame_red_player, text='O', variable=self.redValue, value=0)
+        self.O_red_player = tk.Radiobutton(self.frame_red_player, text='O', variable=self.redValue, value='O')
         self.O_red_player.place(x=50, y=200, width=100, height=30)
 
         self.replay_button = tk.Button(self.frame_red_player, text='Replay')
@@ -217,10 +267,10 @@ class Container2(tk.Frame):
         label_current_game = tk.Label(self.frame_turn,text='Current Turn: ')
         label_current_game.place(x=330, y=30, width=80, height=30)
 
-        self.turn = tk.StringVar()
-        self.turn.set('None')
+        self.valueTurn = tk.StringVar()
+        self.valueTurn.set('red')
 
-        label_turn = tk.Label(self.frame_turn,textvariable=self.turn)
+        label_turn = tk.Label(self.frame_turn,textvariable=self.valueTurn)
         label_turn.place(x=410, y=30, width=50, height=30)
 
 
