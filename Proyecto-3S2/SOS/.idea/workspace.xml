@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="77cadffd-6557-4c1e-a794-c53d97e34d36" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/sprint0/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint0/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint 1/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint 1/Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint 1/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint 1/screens.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +27,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/KRITZAN/Documents/SOS/SOS&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/KRITZAN/Documents/GitHub/CC-3S2/Proyecto-3S2/SOS&quot;
   }
 }</component>
   <component name="RunManager">

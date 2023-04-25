@@ -10,5 +10,8 @@ class Board:
         self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
         return self.board
 
+    def insert_piece(self, row, col, piece):
+        self.board[row][col] = piece
+
 
 

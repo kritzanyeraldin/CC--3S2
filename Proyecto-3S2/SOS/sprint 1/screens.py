@@ -111,19 +111,23 @@ class Container2(tk.Frame):
                 self.canvas.tag_bind('cell', '<Button-1>', self.on_cell_clicked)
 
     def on_cell_clicked(self, event):
+
         x = self.canvas.canvasx(event.x)
         y = self.canvas.canvasy(event.y)
 
+        # Esta division nos indica el indice de la columna en la qu el usuario hace click
         col = int(x // self.cell_size)
         row = int(y // self.cell_size)
 
-        print(self.board.board)
+        print(f'inicio: {self.board.board}')
 
         value = self.redValue.get()
+        value = self.blueValue.get()
+
 
         if self.board.board[row][col] is None:
             if value == 1:
-                self.board.board[row][col] = 'S'
+                self.board.insert_piece(row, col, 'S')
                 self.canvas.create_text(
                     (col + 0.5) * self.cell_size,
                     (row + 0.5) * self.cell_size,
@@ -131,8 +135,9 @@ class Container2(tk.Frame):
                     font=('Arial', 32),
                     fill='red'
                 )
+                self.S_red_player.deselect()
             elif value == 0:
-                self.board.board[row][col] = 'O'
+                self.board.insert_piece(row, col, 'O')
                 self.canvas.create_text(
                     (col + 0.5) * self.cell_size,
                     (row + 0.5) * self.cell_size,
@@ -140,6 +145,15 @@ class Container2(tk.Frame):
                     font=('Arial', 32),
                     fill='red'
                 )
+                self.O_red_player.deselect()
+
+        self.redValue.set(None)
+        self.blueValue.set(None)
+
+        print(f'final: {self.board.board}')
+
+    def turn(self):
+        pass
 
     def init_widgets(self):
 
@@ -156,6 +170,11 @@ class Container2(tk.Frame):
         self.frame_red_player = tk.Frame(self, bg='green')
         self.frame_red_player.place(x=690, y=0, width=210, height=500)
 
+        # frame turno
+        self.frame_turn = tk.Frame(self, bg='black')
+        self.frame_turn.place(x=0, y=500, width=900, height=100)
+
+        # #
         # frame blue_player(210x500)
         label_blue_player = tk.Label(self.frame_blue_player, text='Blue Player')
         label_blue_player.place(x=30, y=50, width=100, height=30)
@@ -163,24 +182,27 @@ class Container2(tk.Frame):
         label_human = tk.Label(self.frame_blue_player, text='Human')
         label_human.place(x=30, y=100, width=100, height=30)
 
-        self.redValue = tk.IntVar()
-        self.S_red_player = tk.Radiobutton(self.frame_blue_player, text='S', variable=self.redValue, value=1)
-        self.S_red_player.place(x=50, y=150, width=100, height=30)
-        self.O_red_player = tk.Radiobutton(self.frame_blue_player, text='O', variable=self.redValue, value=0)
-        self.O_red_player.place(x=50, y=200, width=100, height=30)
+        self.blueValue = tk.IntVar()
+        self.blueValue.set(None)
+        self.S_blue_player = tk.Radiobutton(self.frame_blue_player, text='S', variable=self.blueValue, value=1)
+        self.S_blue_player.place(x=50, y=150, width=100, height=30)
+        self.O_blue_player = tk.Radiobutton(self.frame_blue_player, text='O', variable=self.blueValue, value=0)
+        self.O_blue_player.place(x=50, y=200, width=100, height=30)
 
+        ##
         # frame red_player
-        label_red_player = tk.Label(self.frame_red_player, text='Blue Player')
+        label_red_player = tk.Label(self.frame_red_player, text='Red Player')
         label_red_player.place(x=30, y=50, width=100, height=30)
 
         label_human = tk.Label(self.frame_red_player, text='Human')
         label_human.place(x=30, y=100, width=100, height=30)
 
-        self.blueValue = tk.IntVar()
-        self.S_blue_player = tk.Radiobutton(self.frame_red_player, text='S', variable=self.blueValue, value=1)
-        self.S_blue_player.place(x=50, y=150, width=100, height=30)
-        self.O_blue_player = tk.Radiobutton(self.frame_red_player, text='O', variable=self.blueValue, value=0)
-        self.O_blue_player.place(x=50, y=200, width=100, height=30)
+        self.redValue = tk.IntVar()
+        self.blueValue.set(None)
+        self.S_red_player = tk.Radiobutton(self.frame_red_player, text='S', variable=self.redValue, value=1)
+        self.S_red_player.place(x=50, y=150, width=100, height=30)
+        self.O_red_player = tk.Radiobutton(self.frame_red_player, text='O', variable=self.redValue, value=0)
+        self.O_red_player.place(x=50, y=200, width=100, height=30)
 
         self.replay_button = tk.Button(self.frame_red_player, text='Replay')
         self.replay_button.place(x=50, y=350, width=100, height=40)
@@ -189,3 +211,18 @@ class Container2(tk.Frame):
 
         # creamos el tablero
         self.after(1000, self.create_board())
+
+        ##
+        # frame turn (900x100)
+        label_current_game = tk.Label(self.frame_turn,text='Current Turn: ')
+        label_current_game.place(x=330, y=30, width=80, height=30)
+
+        self.turn = tk.StringVar()
+        self.turn.set('None')
+
+        label_turn = tk.Label(self.frame_turn,textvariable=self.turn)
+        label_turn.place(x=410, y=30, width=50, height=30)
+
+
+
+
