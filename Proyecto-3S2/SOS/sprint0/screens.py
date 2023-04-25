@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter.messagebox import * 
 from constantes import style
+from Board import Board
 
 class Container(tk.Frame):
     def __init__(self,parent,controller):
@@ -55,27 +56,135 @@ class Container2(tk.Frame):
         super().__init__(parent)
         self.container=container
         self.pack()
-        self.place(x=0,y=60,width=1100,height=600)
+        self.place(x=0,y=60,width=900,height=600)
         self.configure(bg=style.beige2)
         self.condition()
-        self.init_widgets()
+        
 
-    def init_widgets(self):
-        pass
 
     def condition(self):
         if int(self.container.entry_board_size.get()) >= 3:
             label=tk.Label(self,text='aqui2')
             label.place(x=0,y=0,width=20,height=20)
+            #self.create_board()
+            self.init_widgets()
+            
 
         else:
             showerror(message="Tamaño invalido.")
 
     def create_board(self):
-        pass
+
+        
+        #Se actualiza el tamaño del contenedor del tablero
+        self.frame_board.update()
+
+        #Crea un tablero vacio
+        '''''
+        self.board_size toma el valor del tamaño del tablero que se ingresa en la interfaz despues de apretar start
+        lo que se quiere es que el tamañp del tablero se adapte a su contenedor en este caso seria self.frame_board
+        asi que se toma el minimo valor entre ancho y altura y luego se divide entre el tamaño del tablero ingresado 
+        de esta forma se logra contener el tablero en el frame board sea cual sea el tamaño que se ingrese.
+        '''
+
+        
+        self.board = Board(int(self.container.entry_board_size.get()))
+        self.board_size=self.board.get_board_size()
+
+        frame_width = self.frame_board.winfo_width()
+        frame_height=self.frame_board.winfo_height()
+        #print(f'frame {frame_width} \ncell')
+        self.cell_size = min(frame_width,frame_height)/self.board_size
+        #print(self.cell_size)
+
+        
+        self.canvas_width = self.board_size * self.cell_size
+        self.canvas_height = self.board_size * self.cell_size
+
+        self.canvas = tk.Canvas(self.frame_board, width=self.canvas_width, height=self.canvas_height)
+        self.canvas.place(x=0,y=0)
+
+        #dibuja los rectangulos del tablero
+        for row in range(self.board_size):
+            for col in range(self.board_size):
+                x0 = col * self.cell_size
+                y0 = row * self.cell_size
+                x1 = (col + 1) * self.cell_size
+                y1 = (row + 1) * self.cell_size
+                self.canvas.create_rectangle(x0, y0, x1, y1, fill='white', tags='cell')
+
+                #self.canvas.tag_bind('cell', '<Button-1>', self.on_cell_clicked)
+
+    def on_cell_clicked(self, event):
+        x = self.canvas.canvasx(event.x)
+        y = self.canvas.canvasy(event.y)
+
+        col = int(x // self.cell_size)
+        row = int(y // self.cell_size)
+
+        if self.board[row][col] == '':
+            self.board[row][col] = 'S'
+            self.canvas.create_text(
+                (col + 0.5) * self.cell_size,
+                (row + 0.5) * self.cell_size,
+                text='S',
+                font=('Arial', 32),
+                fill='red'
+            )
 
 
+    def init_widgets(self):
 
+        #frame blue_player
+        self.frame_blue_player=tk.Frame(self,bg='red')
+        self.frame_blue_player.place(x=0, y=0,width=210,height=500)
+
+        
+
+        #frame tablero
+        self.frame_board=tk.Frame(self,bg='blue')
+        self.frame_board.place(x=210, y=0,width=480,height=500)
+        #print(f'frame {self.frame_board.winfo_width()}')
+        
+
+        #frame red_player
+        self.frame_red_player=tk.Frame(self,bg='green')
+        self.frame_red_player.place(x=690, y=0,width=210,height=500)
+
+
+        #frame blue_player(210x500)
+        label_blue_player=tk.Label(self.frame_blue_player,text='Blue Player')
+        label_blue_player.place(x=30,y=50,width=100,height=30)
+
+        label_human=tk.Label(self.frame_blue_player,text='Human')
+        label_human.place(x=30,y=100,width=100,height=30)
+
+        radioValue = tk.IntVar() 
+        self.S_red_player = tk.Radiobutton(self.frame_blue_player, text='S',variable=radioValue,value=1)
+        self.S_red_player.place(x=50,y=150,width=100,height=30)
+        self.O_red_player = tk.Radiobutton(self.frame_blue_player,text='O',variable=radioValue,value=0)
+        self.O_red_player.place(x=50,y=200,width=100,height=30)
+
+        #frame red_player
+        label_red_player=tk.Label(self.frame_red_player,text='Blue Player')
+        label_red_player.place(x=30,y=50,width=100,height=30)
+
+        label_human=tk.Label(self.frame_red_player,text='Human')
+        label_human.place(x=30,y=100,width=100,height=30)
+
+        radioValue = tk.IntVar() 
+        self.S_blue_player = tk.Radiobutton(self.frame_red_player, text='S',variable=radioValue,value=1)
+        self.S_blue_player.place(x=50,y=150,width=100,height=30)
+        self.O_blue_player = tk.Radiobutton(self.frame_red_player,text='O',variable=radioValue,value=0)
+        self.O_blue_player.place(x=50,y=200,width=100,height=30)
+
+        self.replay_button = tk.Button(self.frame_red_player, text='Replay')
+        self.replay_button.place(x=50,y=350,width=100,height=40)
+        self.new_game_button = tk.Button(self.frame_red_player,text='New Game')
+        self.new_game_button.place(x=50,y=400,width=100,height=40)
+
+        # creamos el tablero
+        self.after(1000,self.create_board())
 
 
 
