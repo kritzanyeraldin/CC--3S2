@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77cadffd-6557-4c1e-a794-c53d97e34d36" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sprint2/Board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint2/Manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint2/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint2/constantes/style.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint2/imagenes/duck.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint2/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint2/screens.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint2/test_Board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint 1/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint 1/Board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint 1/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint 1/screens.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +44,7 @@
       <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS\sprint2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
