@@ -10,7 +10,29 @@ class Board:
         self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
         return self.board
 
+    def get_piece(self, row, col):
+        if (0<=row<self.board_size) and (0<=col<self.board_size):
+            return self.board[row][col]
+        else:
+            return None
+
     def insert_piece(self, row, col, piece):
+        # Validación del rango de las coordenadas
+        if not (0 <= row < self.board_size) or not (0 <= col < self.board_size):
+            return 'Coordenadas fuera del rango del tablero'
+
+        # Validación del tipo de dato de la pieza
+        if not isinstance(piece, str):
+            return 'La pieza debe ser de tipo string'
+
+        # Validación de valores válidos para la pieza
+        valid_pieces = ['S', 'O']
+
+        if piece not in valid_pieces:
+            return 'Pieza no valida'
+
+
+        # Asignación de la pieza al tablero
         self.board[row][col] = piece
 
 
