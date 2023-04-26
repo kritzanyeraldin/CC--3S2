@@ -137,7 +137,7 @@ class Container2(tk.Frame):
                 row = int(y // self.cell_size)
 
             # Insertamos la pieza en la posicion indicada
-            self.board.insert_piece(row, col, piece)
+            self.board.insert_piece(row, col, piece,self.valueTurn.get())
             # Dibujamos la pieza en la posicion indicada
             self.draw_piece(self.valueTurn.get(), row, col, piece)
 
@@ -156,7 +156,7 @@ class Container2(tk.Frame):
             self.O_red_player.config(state='disabled')
 
 
-            self.win_or_tie('blue')
+            self.win_or_tie('red')
 
         else:
 
@@ -164,24 +164,22 @@ class Container2(tk.Frame):
             self.O_blue_player.config(state='disabled')
             self.S_red_player.config(state='normal')
             self.O_red_player.config(state='normal')
-            self.win_or_tie('red')
+            self.win_or_tie('blue')
 
     def win_or_tie(self,turn):
-        state = self.board.win_or_tie()
-        if state == 'Empty Board':
+        complete,player = self.board.win_or_tie()
+        if complete == 'Empty Board':
             showinfo(message='Continue')
         else:
-            if state == 'Continue':
-                self.valueTurn.set(turn)
-            elif state == 'Win':
-                showinfo(message=f'{self.valueTurn.get()}')
-            elif state == 'Tie':
+            if complete == 'Continue':
+                if turn=='red':
+                    self.valueTurn.set('blue')
+                else:
+                    self.valueTurn.set('red')
+            elif complete == 'Win':
+                showinfo(message=f'{player}')
+            elif complete == 'Tie':
                 showinfo(message='Tie')
-
-
-
-
-
 
     def piece(self):
         if (self.redValue.get() == 'S') or (self.blueValue.get() == 'S'):
@@ -197,7 +195,7 @@ class Container2(tk.Frame):
 
     def draw_piece(self, valueTurn, row, col, piece):
         if piece == 'S':
-            self.board.insert_piece(row, col, piece)
+            self.board.insert_piece(row, col, piece,valueTurn)
             self.canvas.create_text(
                 (col + 0.5) * self.cell_size,
                 (row + 0.5) * self.cell_size,
@@ -210,7 +208,7 @@ class Container2(tk.Frame):
             elif valueTurn == 'blue':
                 self.S_blue_player.deselect()
         elif piece == 'O':
-            self.board.insert_piece(row, col, piece)
+            self.board.insert_piece(row, col, piece,valueTurn)
             self.canvas.create_text(
                 (col + 0.5) * self.cell_size,
                 (row + 0.5) * self.cell_size,

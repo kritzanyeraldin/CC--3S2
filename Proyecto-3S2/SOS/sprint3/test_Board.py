@@ -1,4 +1,4 @@
-from sprint2.Board import Board
+from Board import Board
 import random
 import unittest
 
@@ -27,8 +27,8 @@ class TestBoard(unittest.TestCase):
         row = 0
         col = 0
         piece = 'O'
-        self.board.insert_piece(row, col, piece)
-        result = self.board.get_piece(row, col)
+        self.board.insert_piece(row, col, piece, 'red')
+        result = self.board.get_letter(row, col)
         self.assertEqual(result, 'O')
 
     def test_insert_piece_invalid_coordinates(self):
@@ -36,27 +36,27 @@ class TestBoard(unittest.TestCase):
         row = self.board_size
         col = self.board_size
         piece = 'S'
-        result = self.board.insert_piece(row,col,piece)
+        result = self.board.insert_piece(row,col,piece,'red')
         self.assertEqual(result, 'Coordenadas fuera del rango del tablero')
-        self.assertIsNone(self.board.get_piece(row, col))
+        self.assertIsNone(self.board.get_letter(row, col))
 
     def test_insert_piece_invalid_piece_type(self):
         # Insertar una pieza de tipo invalido
         row = 0
         col = 0
         piece = 4
-        result = self.board.insert_piece(row, col, piece)
+        result = self.board.insert_piece(row, col, piece,'red')
         self.assertEqual(result,'La pieza debe ser de tipo string')
-        self.assertIsNone(self.board.get_piece(row,col))
+        self.assertIsNone(self.board.get_letter(row,col))
 
     def test_insert_piece_invalid_piece_value(self):
         # Insertar una pieza con un valor invalido
         row = 0
         col = 0
         piece = 'W'
-        result = self.board.insert_piece(row, col, piece)
+        result = self.board.insert_piece(row, col, piece,'red')
         self.assertEqual(result, 'Pieza no valida')
-        self.assertIsNone(self.board.get_piece(row, col))
+        self.assertIsNone(self.board.get_letter(row, col))
 
     def test_insert_piece_valid_position_busy(self):
         # Insertar una pieza valida en una casilla ocupada
@@ -64,9 +64,9 @@ class TestBoard(unittest.TestCase):
         col = 0
         piece = 'S'
         # Insertamos una pieza en (0,0)
-        self.board.insert_piece(row, col, piece)
+        self.board.insert_piece(row, col, piece,'red')
         # Volvemos a insertar otra pieza en (0,0)
-        result = self.board.insert_piece(row, col, piece)
+        result = self.board.insert_piece(row, col, piece,'red')
         self.assertEqual(result,'Casilla ocupada')
 
 class TestCompleteSOS(unittest.TestCase):
@@ -74,79 +74,87 @@ class TestCompleteSOS(unittest.TestCase):
         self.board = Board(4)
     # Test
     def test_complete_row_SOS(self):
-        self.board.insert_piece(0, 0, 'S')
-        self.board.insert_piece(0, 1, 'S')
-        self.board.insert_piece(0, 2, 'O')
-        self.board.insert_piece(0, 3, 'S')
-        result = self.board.complete_SOS()
+        self.board.insert_piece(0, 0, 'S','red')
+        self.board.insert_piece(0, 1, 'S','red')
+        self.board.insert_piece(0, 2, 'O','red')
+        self.board.insert_piece(0, 3, 'S','red')
+        result,player = self.board.complete_SOS()
         self.assertTrue(result)
+        self.assertEqual(player,'red')
 
     def test_complete_colum_SOS(self):
-        self.board.insert_piece(0, 0, 'S')
-        self.board.insert_piece(1, 0, 'S')
-        self.board.insert_piece(2, 0, 'O')
-        self.board.insert_piece(3, 0, 'S')
-        result = self.board.complete_SOS()
+        self.board.insert_piece(0, 0, 'S','red')
+        self.board.insert_piece(1, 0, 'S','red')
+        self.board.insert_piece(2, 0, 'O','red')
+        self.board.insert_piece(3, 0, 'S','red')
+        result,player = self.board.complete_SOS()
         self.assertTrue(result)
+        self.assertEqual(player,'red')
 
     def test_complete_diagonal_rigth_to_left(self):
-        self.board.insert_piece(0, 0, 'S')
-        self.board.insert_piece(1, 1, 'S')
-        self.board.insert_piece(2, 2, 'O')
-        self.board.insert_piece(3, 3, 'S')
-        result = self.board.complete_SOS()
+        self.board.insert_piece(0, 0, 'S','red')
+        self.board.insert_piece(1, 1, 'S','red')
+        self.board.insert_piece(2, 2, 'O','red')
+        self.board.insert_piece(3, 3, 'S','red')
+        result,player = self.board.complete_SOS()
         self.assertTrue(result)
+        self.assertEqual(player,'red')
 
     def test_complete_diagonal_left_to_rigth(self):
-        self.board.insert_piece(0, 3, 'S')
-        self.board.insert_piece(1, 2, 'S')
-        self.board.insert_piece(2, 1, 'O')
-        self.board.insert_piece(3, 0, 'S')
-        result = self.board.complete_SOS()
+        self.board.insert_piece(0, 3, 'S','red')
+        self.board.insert_piece(1, 2, 'S','red')
+        self.board.insert_piece(2, 1, 'O','red')
+        self.board.insert_piece(3, 0, 'S','red')
+        result,player = self.board.complete_SOS()
         self.assertTrue(result)
+        self.assertEqual(player,'red')
 
 
 class TestWinOrTie(unittest.TestCase):
     def setUp(self):
         self.board = Board(4)
     def test_empty_board(self):
-        result = self.board.win_or_tie()
+        result,player = self.board.win_or_tie()
         self.assertEqual(result,'Empty Board')
+        self.assertEqual(player,'red')
 
     def test_board_complete_SOS_incomplete(self):
         for row in range(self.board.get_board_size()):
             for col in range(self.board.get_board_size()):
-                self.board.insert_piece(row, col, 'S')
-        result = self.board.win_or_tie()
+                self.board.insert_piece(row, col, 'S','red')
+        result, player = self.board.win_or_tie()
         self.assertEqual(result,'Tie')
+        self.assertEqual(player,'None')
 
     def test_board_complete_SOS_complete(self):
-        self.board.insert_piece(0, 0, 'S')
-        self.board.insert_piece(1, 0, 'O')
-        self.board.insert_piece(2, 0, 'S')
-        self.board.insert_piece(3, 0, 'S')
+        self.board.insert_piece(0, 0, 'S','blue')
+        self.board.insert_piece(1, 0, 'O','blue')
+        self.board.insert_piece(2, 0, 'S','blue')
+        self.board.insert_piece(3, 0, 'S','blue')
 
         for row in range(self.board.get_board_size()):
             for col in range(1, self.board.get_board_size()):
-                self.board.insert_piece(row, col, 'S')
+                self.board.insert_piece(row, col, 'S','red')
 
-        result = self.board.win_or_tie()
+        result,player = self.board.win_or_tie()
         self.assertEqual(result, 'Win')
+        self.assertEqual(player,'blue')
 
     def test_board_incomplete_SOS_complete(self):
-        self.board.insert_piece(0, 0, 'S')
-        self.board.insert_piece(1, 0, 'O')
-        self.board.insert_piece(2, 0, 'S')
-        self.board.insert_piece(3, 0, 'S')
+        self.board.insert_piece(0, 0, 'S','blue')
+        self.board.insert_piece(1, 0, 'O','blue')
+        self.board.insert_piece(2, 0, 'S','blue')
+        self.board.insert_piece(3, 0, 'S','blue')
 
-        result = self.board.win_or_tie()
+        result,player = self.board.win_or_tie()
         self.assertEqual(result, 'Win')
 
     def test_board_incomplete_SOS_incomplete(self):
-        self.board.insert_piece(0, 0, 'S')
+        self.board.insert_piece(0, 0, 'S','blue')
 
-        result = self.board.win_or_tie()
+        result,player = self.board.win_or_tie()
         self.assertEqual(result, 'Continue')
+        self.assertEqual(player,'None')
 
 
 if __name__ == '__main__':
