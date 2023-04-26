@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from screens import Container
+from screen import Container
 
 
 class Manager(tk.Tk):

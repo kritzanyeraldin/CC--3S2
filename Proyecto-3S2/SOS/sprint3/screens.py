@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter.messagebox import *
-from sprint2.constantes import style
-from sprint2.Board import Board
+from constantes import style
+from Board import Board
 
 
 class Container(tk.Frame):
@@ -59,6 +59,7 @@ class Container2(tk.Frame):
         self.place(x=0, y=60, width=900, height=600)
         self.configure(bg=style.beige2)
         self.condition()
+        self.canvas.variable = tk.StringVar()
 
     def condition(self):
         if int(self.container.entry_board_size.get()) >= 3:
@@ -96,8 +97,11 @@ class Container2(tk.Frame):
         self.canvas_width = self.board_size * self.cell_size
         self.canvas_height = self.board_size * self.cell_size
 
+
+
         self.canvas = tk.Canvas(self.frame_board, width=self.canvas_width, height=self.canvas_height)
         self.canvas.place(x=0, y=0)
+        self.canvas.variable = None
 
         # dibuja los rectangulos del tablero
         for row in range(self.board_size):
@@ -108,70 +112,40 @@ class Container2(tk.Frame):
                 y1 = (row + 1) * self.cell_size
                 self.canvas.create_rectangle(x0, y0, x1, y1, fill='white', tags='cell')
 
+
                 self.canvas.tag_bind('cell', '<Button-1>', self.on_cell_clicked)
 
     def on_cell_clicked(self, event):
 
-        x = self.canvas.canvasx(event.x)
-        y = self.canvas.canvasy(event.y)
-
-        # Esta division nos indica el indice de la columna en la qu el usuario hace click
-        col = int(x // self.cell_size)
-        row = int(y // self.cell_size)
-
-        print(f'inicio: {self.board.board}')
-
-        piece = None
         piece = self.piece()
+        if piece !=None:
+            x = self.canvas.canvasx(event.x)
+            y = self.canvas.canvasy(event.y)
 
-        if self.board.board[row][col] is None:
-            if self.valueTurn.get() == 'red':
-                if piece == 'S':
-                    self.board.insert_piece(row, col, piece)
-                    self.canvas.create_text(
-                        (col + 0.5) * self.cell_size,
-                        (row + 0.5) * self.cell_size,
-                        text='S',
-                        font=('Arial', 32),
-                        fill='red'
-                        )
-                    self.S_red_player.deselect()
-                elif piece == 'O':
-                    self.board.insert_piece(row, col, piece)
-                    self.canvas.create_text(
-                        (col + 0.5) * self.cell_size,
-                        (row + 0.5) * self.cell_size,
-                        text='O',
-                        font=('Arial', 32),
-                        fill='red'
-                        )
-                    self.O_red_player.deselect()
+            # Esta division nos indica el indice de la columna en la qu el usuario hace click
+            col = int(x // self.cell_size)
+            row = int(y // self.cell_size)
 
-            if self.valueTurn.get() == 'blue':
-                if piece == 'S':
-                    self.board.insert_piece(row, col, piece)
-                    self.canvas.create_text(
-                        (col + 0.5) * self.cell_size,
-                        (row + 0.5) * self.cell_size,
-                        text='S',
-                        font=('Arial', 32),
-                        fill='blue'
-                        )
-                    self.S_blue_player.deselect()
-                elif piece == 'O':
-                    self.board.insert_piece(row, col, piece)
-                    self.canvas.create_text(
-                        (col + 0.5) * self.cell_size,
-                        (row + 0.5) * self.cell_size,
-                        text='O',
-                        font=('Arial', 32),
-                        fill='blue'
-                        )
-                    self.O_blue_player.deselect()
+            print(f'inicio: {self.board.board}')
 
-        self.turn()
+            # Mientras la celda seleccionada esté ocupada, solicitar al jugador que seleccione otra celda vacía
+            while self.board.get_piece(row, col) is not None:
+                showinfo(message='Casilla Ocupada')
+                event = self.canvas.wait_variable(self.canvas.variable)
+                x = self.canvas.canvasx(event.x)
+                y = self.canvas.canvasy(event.y)
+                col = int(x // self.cell_size)
+                row = int(y // self.cell_size)
 
-        print(f'final: {self.board.board}')
+            self.board.insert_piece(row, col, piece)
+            # Insertamos la pieza en la posición obtenida
+            self.draw_piece(self.valueTurn.get(), row, col, piece)
+
+            self.turn()
+
+            print(f'final: {self.board.board}')
+        else:
+            showerror(message='Seleccione una pieza')
 
     def turn(self):
         if self.valueTurn.get() == 'red':
@@ -202,6 +176,36 @@ class Container2(tk.Frame):
         self.redValue.set(None)
         self.blueValue.set(None)
         return piece
+
+    def draw_piece(self, valueTurn, row, col, piece):
+        if piece == 'S':
+            self.board.insert_piece(row, col, piece)
+            self.canvas.create_text(
+                (col + 0.5) * self.cell_size,
+                (row + 0.5) * self.cell_size,
+                text='S',
+                font=('Arial', 32),
+                fill=valueTurn
+            )
+            if valueTurn == 'red':
+                self.S_red_player.deselect()
+            elif valueTurn == 'blue':
+                self.S_blue_player.deselect()
+        elif piece == 'O':
+            self.board.insert_piece(row, col, piece)
+            self.canvas.create_text(
+                (col + 0.5) * self.cell_size,
+                (row + 0.5) * self.cell_size,
+                text='O',
+                font=('Arial', 32),
+                fill=valueTurn
+            )
+            if valueTurn == 'red':
+                self.O_red_player.deselect()
+            elif valueTurn == 'blue':
+                self.O_blue_player.deselect()
+
+
 
 
 
