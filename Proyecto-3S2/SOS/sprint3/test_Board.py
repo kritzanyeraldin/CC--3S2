@@ -23,22 +23,23 @@ class TestBoard(unittest.TestCase):
 
 
     def test_insert_piece_valid(self):
-        #Insertar una pieza valida en una posicion valida
+        #Insertar una pieza valida en una posicion valida y tambien el juego que ha ingreso la ficha
         row = 0
         col = 0
         piece = 'O'
         self.board.insert_piece(row, col, piece, 'red')
         result = self.board.get_letter(row, col)
         self.assertEqual(result, 'O')
+        self.assertEqual(self.board.get_player(row,col), 'red')
 
     def test_insert_piece_invalid_coordinates(self):
-        # Insertar una pieza en una posicion invalida
+        # Insertar una pieza en una posicion invalida y tambien el juego que se ha ingresado la ficha
         row = self.board_size
         col = self.board_size
         piece = 'S'
         result = self.board.insert_piece(row,col,piece,'red')
         self.assertEqual(result, 'Coordenadas fuera del rango del tablero')
-        self.assertIsNone(self.board.get_letter(row, col))
+        self.assertIsNone(self.board.get_letter(row, col), 'red')
 
     def test_insert_piece_invalid_piece_type(self):
         # Insertar una pieza de tipo invalido en una posicion valida

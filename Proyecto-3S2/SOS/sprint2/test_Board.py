@@ -1,13 +1,15 @@
-from sprint2.Board import Board
+from Board import Board
 import random
 import unittest
 
 
 class TestBoard(unittest.TestCase):
+    #este metodo inicializa un tablero de nxn
     def setUp(self):
         self.board_size = random.randint(3, 100)
         self.board = Board(self.board_size)
 
+    # Comprueba que el tablero se haya creado correctamente y que sus elementos sean None
     def test_create_board(self):
 
         # Verificamos si el tablero tiene tamaño n en cada dimension
@@ -23,7 +25,7 @@ class TestBoard(unittest.TestCase):
 
 
     def test_insert_piece_valid(self):
-        #Insertar una pieza valida en una posicion valida
+        # Insertar una pieza valida en una posicion valida
         row = 0
         col = 0
         piece = 'O'
@@ -41,7 +43,7 @@ class TestBoard(unittest.TestCase):
         self.assertIsNone(self.board.get_piece(row, col))
 
     def test_insert_piece_invalid_piece_type(self):
-        # Insertar una pieza de tipo invalido
+        # Insertar una pieza de tipo invalido entero
         row = 0
         col = 0
         piece = 4
@@ -50,7 +52,7 @@ class TestBoard(unittest.TestCase):
         self.assertIsNone(self.board.get_piece(row,col))
 
     def test_insert_piece_invalid_piece_value(self):
-        # Insertar una pieza con un valor invalido
+        # Insertar una pieza con un valor invalido string
         row = 0
         col = 0
         piece = 'W'
@@ -74,6 +76,7 @@ class TestCompleteSOS(unittest.TestCase):
         self.board = Board(4)
     # Test
     def test_complete_row_SOS(self):
+        #Comprueba si exite un SOS en 3 casillas contiguas de  una fila
         self.board.insert_piece(0, 0, 'S')
         self.board.insert_piece(0, 1, 'S')
         self.board.insert_piece(0, 2, 'O')
@@ -82,6 +85,7 @@ class TestCompleteSOS(unittest.TestCase):
         self.assertTrue(result)
 
     def test_complete_colum_SOS(self):
+        # Comprueba si exite un SOS en 3 casillas contiguas de  una columna
         self.board.insert_piece(0, 0, 'S')
         self.board.insert_piece(1, 0, 'S')
         self.board.insert_piece(2, 0, 'O')
@@ -90,6 +94,7 @@ class TestCompleteSOS(unittest.TestCase):
         self.assertTrue(result)
 
     def test_complete_diagonal_rigth_to_left(self):
+        # Comprueba si exite un SOS en 3 casillas contiguas de una diagonal que va izquierda a derecha
         self.board.insert_piece(0, 0, 'S')
         self.board.insert_piece(1, 1, 'S')
         self.board.insert_piece(2, 2, 'O')
@@ -98,6 +103,7 @@ class TestCompleteSOS(unittest.TestCase):
         self.assertTrue(result)
 
     def test_complete_diagonal_left_to_rigth(self):
+        # Comprueba si exite un SOS en 3 casillas contiguas de  una diagonal que va de derecha a izquierda
         self.board.insert_piece(0, 3, 'S')
         self.board.insert_piece(1, 2, 'S')
         self.board.insert_piece(2, 1, 'O')
@@ -106,7 +112,7 @@ class TestCompleteSOS(unittest.TestCase):
         self.assertTrue(result)
 
 
-class TestWinOrTie(unittest.TestCase):
+class TestWinOrTie(unittest.TestCase): #Ganado Empatado
     def setUp(self):
         self.board = Board(4)
     def test_empty_board(self):
@@ -114,13 +120,17 @@ class TestWinOrTie(unittest.TestCase):
         self.assertEqual(result,'Empty Board')
 
     def test_board_complete_SOS_incomplete(self):
+        # Tablero completo pero no existe un SOS
+        #lleno el tablero de S
         for row in range(self.board.get_board_size()):
             for col in range(self.board.get_board_size()):
                 self.board.insert_piece(row, col, 'S')
+
         result = self.board.win_or_tie()
         self.assertEqual(result,'Tie')
 
     def test_board_complete_SOS_complete(self):
+        # Tablero completo si existe un SOS
         self.board.insert_piece(0, 0, 'S')
         self.board.insert_piece(1, 0, 'O')
         self.board.insert_piece(2, 0, 'S')

@@ -66,8 +66,6 @@ class Container2(tk.Frame):
             label.place(x=0, y=0, width=20, height=20)
             # self.create_board()
             self.init_widgets()
-
-
         else:
             showerror(message="Tamaño invalido.")
 

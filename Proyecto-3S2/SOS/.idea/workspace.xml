@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77cadffd-6557-4c1e-a794-c53d97e34d36" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/sprint3/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint3/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint2/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint2/Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint2/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint2/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint2/test_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint2/test_Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint3/test_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint3/test_Board.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,49 +52,21 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Board" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_Board.TestBoard.test_insert_piece_valid" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="SOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sprint3" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sprint3/Board.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_Board.TestBoard.test_insert_piece_valid&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="SOS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sprint3" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sprint3/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_Board.TestBoard" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_Board.TestWinOrTie.test_board_complete_SOS_complete" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="SOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -100,11 +76,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_Board.TestBoard&quot;" />
+      <option name="_new_target" value="&quot;test_Board.TestWinOrTie.test_board_complete_SOS_complete&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_Board.TestWinOrTie" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_Board.TestWinOrTie.test_board_incomplete_SOS_complete" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="SOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -114,22 +90,22 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_Board.TestWinOrTie&quot;" />
+      <option name="_new_target" value="&quot;test_Board.TestWinOrTie.test_board_incomplete_SOS_complete&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_Board.py (1)" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_Board.TestWinOrTie.test_board_incomplete_SOS_incomplete" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="SOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sprint3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sprint2" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/sprint3/test_Board.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_Board.TestWinOrTie.test_board_incomplete_SOS_incomplete&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests in test_Board.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -148,11 +124,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python tests.Python tests in test_Board.py (1)" />
-        <item itemvalue="Python.Board" />
-        <item itemvalue="Python tests.Python tests for test_Board.TestBoard" />
-        <item itemvalue="Python tests.Python tests for test_Board.TestWinOrTie" />
+        <item itemvalue="Python tests.Python tests for test_Board.TestBoard.test_insert_piece_valid" />
+        <item itemvalue="Python tests.Python tests in test_Board.py" />
+        <item itemvalue="Python tests.Python tests for test_Board.TestWinOrTie.test_board_incomplete_SOS_incomplete" />
+        <item itemvalue="Python tests.Python tests for test_Board.TestWinOrTie.test_board_incomplete_SOS_complete" />
+        <item itemvalue="Python tests.Python tests for test_Board.TestWinOrTie.test_board_complete_SOS_complete" />
       </list>
     </recent_temporary>
   </component>
@@ -174,6 +150,21 @@
           <url>file://$PROJECT_DIR$/sprint 1/test_Board.py</url>
           <line>73</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sprint2/test_Board.py</url>
+          <line>5</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sprint2/test_Board.py</url>
+          <line>73</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sprint2/test_Board.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

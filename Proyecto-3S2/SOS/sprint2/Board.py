@@ -89,6 +89,7 @@ class Board:
                 if self.get_piece(row, col) == 'S' and self.get_piece(row + 1, col + 1) == 'O' and self.get_piece(
                         row + 2, col + 2) == 'S':
                     return True
+
         # Verifica en diagonal(es) de derecha a izquierda
         for row in range(2, size):
             for col in range(size - 2):
