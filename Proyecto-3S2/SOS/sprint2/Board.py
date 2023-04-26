@@ -15,6 +15,7 @@ class Board:
         else:
             return None
 
+
     def get_board(self):
         return self.board
 
@@ -59,11 +60,11 @@ class Board:
         if piece not in valid_pieces:
             return 'Pieza no valida'
 
-        if not self.get_piece(row, col) is None:
+        if not self.get_piece(row, col) == None:
             return 'Casilla ocupada'
 
         # Asignación de la pieza al tablero
-        self.insert_piece(row, col, piece)
+        self.board[row][col] = piece
 
     def complete_SOS(self):
         size = self.get_board_size()
