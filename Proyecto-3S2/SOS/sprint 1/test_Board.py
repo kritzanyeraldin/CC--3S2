@@ -28,8 +28,9 @@ class TestBoard(unittest.TestCase):
         row = 0
         col = 0
         piece = 'O'
-        result = self.board.insert_piece(row, col, piece)
-        self.assertEqual(self.board.get_piece(row, col), 'O')
+        self.board.insert_piece(row, col, piece)
+        result = self.board.get_piece(row, col)
+        self.assertEqual(result, 'O')
 
     def test_insert_piece_invalid_coordinates(self):
         # Insertar una pieza en una posicion invalida
@@ -58,8 +59,16 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(result, 'Pieza no valida')
         self.assertIsNone(self.board.get_piece(row, col))
 
-
-
+    def test_insert_piece_valid_position_busy(self):
+        # Insertar una pieza valida en una casilla ocupada
+        row = 0
+        col = 0
+        piece = 'S'
+        # Insertamos una pieza en (0,0)
+        self.board.insert_piece(row, col, piece)
+        # Volvemos a insertar otra pieza en (0,0)
+        result = self.board.insert_piece(row, col, piece)
+        self.assertEqual(result,'Casilla ocupada')
 
 
 if __name__ == '__main__':

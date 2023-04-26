@@ -31,6 +31,8 @@ class Board:
         if piece not in valid_pieces:
             return 'Pieza no valida'
 
+        if not (self.get_piece(row,col) == None):
+            return 'Casilla ocupada'
 
         # Asignación de la pieza al tablero
         self.board[row][col] = piece
