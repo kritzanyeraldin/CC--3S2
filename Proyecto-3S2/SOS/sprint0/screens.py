@@ -48,9 +48,6 @@ class Container(tk.Frame):
         self.entry_board_size=tk.Entry(self.frame1,font='Arial 10')
         self.entry_board_size.place(x=600,y=20,width=40,height=20)
 
-        
-
-
 class Container2(tk.Frame):
     def __init__(self,parent,container):
         super().__init__(parent)
@@ -59,8 +56,6 @@ class Container2(tk.Frame):
         self.place(x=0,y=60,width=900,height=600)
         self.configure(bg=style.beige2)
         self.condition()
-        
-
 
     def condition(self):
         if int(self.container.entry_board_size.get()) >= 3:
@@ -68,14 +63,11 @@ class Container2(tk.Frame):
             label.place(x=0,y=0,width=20,height=20)
             #self.create_board()
             self.init_widgets()
-            
-
         else:
             showerror(message="Tamaño invalido.")
 
     def create_board(self):
 
-        
         #Se actualiza el tamaño del contenedor del tablero
         self.frame_board.update()
 
@@ -86,8 +78,6 @@ class Container2(tk.Frame):
         asi que se toma el minimo valor entre ancho y altura y luego se divide entre el tamaño del tablero ingresado 
         de esta forma se logra contener el tablero en el frame board sea cual sea el tamaño que se ingrese.
         '''
-
-        
         self.board = Board(int(self.container.entry_board_size.get()))
         self.board_size=self.board.get_board_size()
 
@@ -138,8 +128,6 @@ class Container2(tk.Frame):
         #frame blue_player
         self.frame_blue_player=tk.Frame(self,bg='red')
         self.frame_blue_player.place(x=0, y=0,width=210,height=500)
-
-        
 
         #frame tablero
         self.frame_board=tk.Frame(self,bg='blue')

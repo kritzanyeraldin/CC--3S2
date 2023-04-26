@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
 from screens import Container
-
-
 class Manager(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -10,15 +8,12 @@ class Manager(tk.Tk):
         self.geometry("900x650")
         icon = PhotoImage(file="imagenes/duck.png")
         self.iconphoto(True, icon)
-
         self.resizable(False, False)
         container = tk.Frame(self)
         container.pack(
             side=tk.TOP,
             fill=tk.BOTH,
-            expand=True
-        )
-
+            expand=True)
         container.configure(bg="red")
 
         self.frames = {}
