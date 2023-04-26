@@ -16,8 +16,8 @@ class Container(tk.Frame):
         self.init_widgets()
 
         self.frames = {}
-        self.create_frames_button = tk.Button(self, text="Start", command=self.create_frames)
-        self.create_frames_button.place(x=760, y=20, width=70, height=20)
+        self.create_frames_button = tk.Button(self, text="Start",**style.menu, command=self.create_frames)
+        self.create_frames_button.place(x=760, y=20, width=70, height=25)
 
     def create_frames(self):
         f = Container2
@@ -37,16 +37,16 @@ class Container(tk.Frame):
         self.frame1 = tk.Frame(self, bg=style.beige)
         self.frame1.place(x=0, y=0, width=760, height=60)
 
-        self.simple_game_button = tk.Button(self.frame1, text="Simple Game", bg='#FCDDD6')
-        self.simple_game_button.place(x=120, y=20, width=100, height=20)
+        self.simple_game_button = tk.Button(self.frame1, text="Simple Game", **style.menu)
+        self.simple_game_button.place(x=120, y=20, width=100, height=30)
 
-        self.general_game_button = tk.Button(self.frame1, text="General Game", bg='#FCDDD6')
-        self.general_game_button.place(x=270, y=20, width=100, height=20)
+        self.general_game_button = tk.Button(self.frame1, text="General Game", **style.menu)
+        self.general_game_button.place(x=270, y=20, width=100, height=30)
 
-        label_board_size = tk.Label(self.frame1, text='Board size: ', font='Arial 10')
+        label_board_size = tk.Label(self.frame1, text='Board size: ', **style.label)
         label_board_size.place(x=500, y=20, width=100, height=20)
 
-        self.entry_board_size = tk.Entry(self.frame1, font='Arial 10')
+        self.entry_board_size = tk.Entry(self.frame1, font=style.arial)
         self.entry_board_size.place(x=600, y=20, width=40, height=20)
 
 
@@ -63,14 +63,10 @@ class Container2(tk.Frame):
 
     def condition(self):
         if int(self.container.entry_board_size.get()) >= 3:
-            label = tk.Label(self, text='aqui2')
-            label.place(x=0, y=0, width=20, height=20)
             # self.create_board()
             self.init_widgets()
-
-
         else:
-            showerror(message="Tamaño invalido.")
+            showerror(tittle='Error',message="Tamaño invalido.")
 
     def create_board(self):
 
@@ -84,7 +80,6 @@ class Container2(tk.Frame):
         asi que se toma el minimo valor entre ancho y altura y luego se divide entre el tamaño del tablero ingresado 
         de esta forma se logra contener el tablero en el frame board sea cual sea el tamaño que se ingrese.
         '''
-
         self.board = Board(int(self.container.entry_board_size.get()))
         self.board_size = self.board.get_board_size()
 
@@ -129,7 +124,7 @@ class Container2(tk.Frame):
 
             # Mientras la celda seleccionada esté ocupada, solicitar al jugador que seleccione otra celda vacía
             while self.board.get_piece(row, col) is not None:
-                showinfo(message='Casilla Ocupada')
+                showinfo(tittle='Care',message='Casilla Ocupada')
                 event = self.canvas.wait_variable(self.canvas.variable)
                 x = self.canvas.canvasx(event.x)
                 y = self.canvas.canvasy(event.y)
@@ -145,7 +140,7 @@ class Container2(tk.Frame):
 
             print(f'final: {self.board.board}')
         else:
-            showerror(message='Seleccione una pieza')
+            showerror(title='Error',message='Seleccione una pieza')
 
     def turn(self):
         if self.valueTurn.get() == 'red':
@@ -154,12 +149,8 @@ class Container2(tk.Frame):
             self.O_blue_player.config(state='normal')
             self.S_red_player.config(state='disabled')
             self.O_red_player.config(state='disabled')
-
-
             self.win_or_tie('red')
-
         else:
-
             self.S_blue_player.config(state='disabled')
             self.O_blue_player.config(state='disabled')
             self.S_red_player.config(state='normal')
@@ -169,7 +160,7 @@ class Container2(tk.Frame):
     def win_or_tie(self,turn):
         complete,player = self.board.win_or_tie()
         if complete == 'Empty Board':
-            showinfo(message='Continue')
+            showinfo(title='Care',message='Continue')
         else:
             if complete == 'Continue':
                 if turn=='red':
@@ -177,9 +168,9 @@ class Container2(tk.Frame):
                 else:
                     self.valueTurn.set('red')
             elif complete == 'Win':
-                showinfo(message=f'{player}')
+                showinfo(title='Care',message=f'{player} player win.\nCongratulations!')
             elif complete == 'Tie':
-                showinfo(message='Tie')
+                showinfo(title='Care',message='Tie.\nTry again')
 
     def piece(self):
         if (self.redValue.get() == 'S') or (self.blueValue.get() == 'S'):
@@ -221,62 +212,58 @@ class Container2(tk.Frame):
             elif valueTurn == 'blue':
                 self.O_blue_player.deselect()
 
-
-
-
-
     def init_widgets(self):
 
         # frame blue_player
-        self.frame_blue_player = tk.Frame(self, bg='red')
+        self.frame_blue_player = tk.Frame(self, bg=style.beige2)
         self.frame_blue_player.place(x=0, y=0, width=210, height=500)
 
         # frame tablero
-        self.frame_board = tk.Frame(self, bg='blue')
+        self.frame_board = tk.Frame(self, bg=style.beige2)
         self.frame_board.place(x=210, y=0, width=480, height=500)
         # print(f'frame {self.frame_board.winfo_width()}')
 
         # frame red_player
-        self.frame_red_player = tk.Frame(self, bg='green')
+        self.frame_red_player = tk.Frame(self, bg=style.beige2)
         self.frame_red_player.place(x=690, y=0, width=210, height=500)
 
         # frame turno
-        self.frame_turn = tk.Frame(self, bg='black')
+        self.frame_turn = tk.Frame(self, bg=style.beige)
         self.frame_turn.place(x=0, y=500, width=900, height=100)
 
         # #
         # frame blue_player(210x500)
-        label_blue_player = tk.Label(self.frame_blue_player, text='Blue Player')
+        label_blue_player = tk.Label(self.frame_blue_player, text='Blue Player',**style.blue)
         label_blue_player.place(x=30, y=50, width=100, height=30)
 
-        label_human = tk.Label(self.frame_blue_player, text='Human')
+        label_human = tk.Label(self.frame_blue_player, text='Human',bg=style.beige2)
         label_human.place(x=30, y=100, width=100, height=30)
 
         self.blueValue = tk.StringVar()
         self.blueValue.set(None)
-        self.S_blue_player = tk.Radiobutton(self.frame_blue_player, text='S', variable=self.blueValue, value='S', state='disabled')
+        self.S_blue_player = tk.Radiobutton(self.frame_blue_player, text='S',**style.letras, variable=self.blueValue, value='S', state='disabled')
         self.S_blue_player.place(x=50, y=150, width=100, height=30)
-        self.O_blue_player = tk.Radiobutton(self.frame_blue_player, text='O', variable=self.blueValue, value='O',state='disabled')
+        self.O_blue_player = tk.Radiobutton(self.frame_blue_player, text='O',**style.letras, variable=self.blueValue, value='O',state='disabled')
         self.O_blue_player.place(x=50, y=200, width=100, height=30)
 
         ##
         # frame red_player
-        label_red_player = tk.Label(self.frame_red_player, text='Red Player')
+        label_red_player = tk.Label(self.frame_red_player, text='Red Player',**style.red)
         label_red_player.place(x=30, y=50, width=100, height=30)
 
-        label_human = tk.Label(self.frame_red_player, text='Human')
+        label_human = tk.Label(self.frame_red_player, text='Human',bg=style.beige2)
         label_human.place(x=30, y=100, width=100, height=30)
 
         self.redValue = tk.StringVar()
         self.redValue.set(None)
-        self.S_red_player = tk.Radiobutton(self.frame_red_player, text='S', variable=self.redValue, value='S')
+        self.S_red_player = tk.Radiobutton(self.frame_red_player, text='S',**style.letras, variable=self.redValue, value='S')
         self.S_red_player.place(x=50, y=150, width=100, height=30)
-        self.O_red_player = tk.Radiobutton(self.frame_red_player, text='O', variable=self.redValue, value='O')
+        self.O_red_player = tk.Radiobutton(self.frame_red_player, text='O',**style.letras, variable=self.redValue, value='O')
         self.O_red_player.place(x=50, y=200, width=100, height=30)
 
-        self.replay_button = tk.Button(self.frame_red_player, text='Replay')
+        self.replay_button = tk.Button(self.frame_red_player, text='Replay',**style.menu,state='disabled')
         self.replay_button.place(x=50, y=350, width=100, height=40)
-        self.new_game_button = tk.Button(self.frame_red_player, text='New Game')
+        self.new_game_button = tk.Button(self.frame_red_player, text='New Game',**style.menu,state='disabled')
         self.new_game_button.place(x=50, y=400, width=100, height=40)
 
         # creamos el tablero
@@ -284,13 +271,13 @@ class Container2(tk.Frame):
 
         ##
         # frame turn (900x100)
-        label_current_game = tk.Label(self.frame_turn,text='Current Turn: ')
+        label_current_game = tk.Label(self.frame_turn,text='Current Turn: ',**style.label)
         label_current_game.place(x=330, y=30, width=80, height=30)
 
         self.valueTurn = tk.StringVar()
         self.valueTurn.set('red')
 
-        label_turn = tk.Label(self.frame_turn,textvariable=self.valueTurn)
+        label_turn = tk.Label(self.frame_turn,textvariable=self.valueTurn,**style.label)
         label_turn.place(x=410, y=30, width=50, height=30)
 
 
