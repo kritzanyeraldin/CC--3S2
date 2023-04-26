@@ -6,10 +6,6 @@ class Board:
     def get_board_size(self):
         return self.board_size
 
-    def create_board(self):
-        self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
-        return self.board
-
     def get_piece(self, row, col):
         if (0 <= row < self.board_size) and (0 <= col < self.board_size):
             return self.board[row][col]
@@ -17,6 +13,32 @@ class Board:
             return None
 
     def get_board(self):
+        return self.board
+
+    def board_complete(self):
+        size = self.get_board_size()
+        for row in range(size):
+            for col in range(size):
+                piece = self.get_piece(row, col)
+                if not piece is None:
+                    continue
+                else:
+                    return False
+        return True
+
+    def board_empty(self):
+        size = self.get_board_size()
+        for row in range(size):
+            for col in range(size):
+                piece = self.get_piece(row, col)
+                if piece == None:
+                   continue
+                else:
+                    return False
+        return True
+
+    def create_board(self):
+        self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
         return self.board
 
     def insert_piece(self, row, col, piece):
@@ -66,6 +88,21 @@ class Board:
                 if self.get_piece(row, col) == 'S' and self.get_piece(row-1, col+1) == 'O' and self.get_piece(row-2, col+2) == 'S':
                     return True
         return False
+
+    def win_or_tie(self):
+        if self.board_empty():
+            return 'Empty Board'
+        else:
+            if self.board_complete():
+                if not self.complete_SOS():
+                    return 'Tie'
+                else:
+                    return 'Win'
+            else:
+                if self.complete_SOS():
+                    return 'Win'
+                else:
+                    return 'Continue'
 
 
 
