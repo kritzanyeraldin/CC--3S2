@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from sprint3.screens import Container
+from screens import Container
 
 
 class Manager(tk.Tk):

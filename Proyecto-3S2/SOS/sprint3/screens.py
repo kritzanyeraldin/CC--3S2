@@ -116,7 +116,6 @@ class Container2(tk.Frame):
                 self.canvas.tag_bind('cell', '<Button-1>', self.on_cell_clicked)
 
     def on_cell_clicked(self, event):
-
         piece = self.piece()
         if piece !=None:
             x = self.canvas.canvasx(event.x)
@@ -137,8 +136,9 @@ class Container2(tk.Frame):
                 col = int(x // self.cell_size)
                 row = int(y // self.cell_size)
 
+            # Insertamos la pieza en la posicion indicada
             self.board.insert_piece(row, col, piece)
-            # Insertamos la pieza en la posición obtenida
+            # Dibujamos la pieza en la posicion indicada
             self.draw_piece(self.valueTurn.get(), row, col, piece)
 
             self.turn()
@@ -154,7 +154,9 @@ class Container2(tk.Frame):
             self.O_blue_player.config(state='normal')
             self.S_red_player.config(state='disabled')
             self.O_red_player.config(state='disabled')
-            self.valueTurn.set('blue')
+
+
+            self.win_or_tie('blue')
 
         else:
 
@@ -162,7 +164,23 @@ class Container2(tk.Frame):
             self.O_blue_player.config(state='disabled')
             self.S_red_player.config(state='normal')
             self.O_red_player.config(state='normal')
-            self.valueTurn.set('red')
+            self.win_or_tie('red')
+
+    def win_or_tie(self,turn):
+        state = self.board.win_or_tie()
+        if state == 'Empty Board':
+            showinfo(message='Continue')
+        else:
+            if state == 'Continue':
+                self.valueTurn.set(turn)
+            elif state == 'Win':
+                showinfo(message=f'{self.valueTurn.get()}')
+            elif state == 'Tie':
+                showinfo(message='Tie')
+
+
+
+
 
 
     def piece(self):
