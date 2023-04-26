@@ -41,7 +41,7 @@ class TestBoard(unittest.TestCase):
         self.assertIsNone(self.board.get_letter(row, col))
 
     def test_insert_piece_invalid_piece_type(self):
-        # Insertar una pieza de tipo invalido
+        # Insertar una pieza de tipo invalido en una posicion valida
         row = 0
         col = 0
         piece = 4
@@ -50,7 +50,7 @@ class TestBoard(unittest.TestCase):
         self.assertIsNone(self.board.get_letter(row,col))
 
     def test_insert_piece_invalid_piece_value(self):
-        # Insertar una pieza con un valor invalido
+        # Insertar una pieza con un valor invalido en una posicion valida
         row = 0
         col = 0
         piece = 'W'
