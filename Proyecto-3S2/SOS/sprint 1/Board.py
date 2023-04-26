@@ -40,77 +40,32 @@ class Board:
         # Asignación de la pieza al tablero
         self.board[row][col] = piece
 
-    def rows(self):
-        row = 0
-        m = ''
-        while row < self.get_board_size():
-            for col in range(self.get_board_size()):
-                m += self.get_piece(row, col)
-            if m == 'SOS':
-                return True
-                break
-            else:
-                m=''
-                row += 1
-                continue
-        return False
-
-    def cols(self):
-        col=0
-        m=''
-        while col<self.get_board_size():
-            for row in range(self.get_board_size()):
-                m+=self.get_piece(row,col)
-            if m=='SOS':
-                return True
-                break
-            else:
-                m=''
-                col+=1
-                continue
-        return False
-
-    def check_diagonals(self):
-        size = self.get_board_size()
-        for i in range(size):
-            for j in range(size):
-                for k in range(4, min(size - i, size - j) + 1):
-                    # diagonal desde la esquina superior izquierda hasta la inferior derecha
-                    m = ""
-                    for x in range(k):
-                        m += self.get_piece(i+x,j+x)
-                    if m == "SOS":
-                        return True
-                    # diagonal desde la esquina inferior izquierda hasta la superior derecha
-                    if i >= k - 1:
-                        n = ""
-                        for x in range(k):
-                            n += self.get_piece(i-x,j+x)
-                        if n == "SOS":
-                            return True
-        return False
-
 
     def complete_SOS(self):
+        size = self.get_board_size()
+        # Verifica en fila
+        for row in range(size):
+            for col in range(size - 2):
+                if self.get_piece(row, col) == 'S' and self.get_piece(row, col+1) == 'O' and self.get_piece(row, col+2) == 'S':
+                    return True
 
-            if m=='SOS':
-                print(f'complete')
+        # verifica en columna
+        for row in range(size - 2):
+            for col in range(size):
+                if self.get_piece(row, col) == 'S' and self.get_piece(row+1, col) == 'O' and self.get_piece(row+2, col) == 'S':
+                    return True
+
+        # Verifica en diagonal(es) de izquierda a derecha
+        for row in range(size - 2):
+            for col in range(size - 2):
+                if self.get_piece(row, col) == 'S' and self.get_piece(row+1, col+1) == 'O' and self.get_piece(row+2, col+2) == 'S':
+                    return True
+        # Verifica en diagonal(es) de derecha a izquierda
+        for row in range(2, size):
+            for col in range(size - 2):
+                if self.get_piece(row, col) == 'S' and self.get_piece(row-1, col+1) == 'O' and self.get_piece(row-2, col+2) == 'S':
+                    return True
+        return False
 
 
 
-board = Board(4)
-print(board.get_board())
-
-
-for m in range(4):
-    i = int(input('Ingrese fila: '))
-    j = int(input('Ingrese columna: '))
-    p = input('Ingrese una pieza: ')
-    board.insert_piece(i, j, p)
-
-print(board.get_board())
-if board.rows():
-    print('win')
-
-else:
-    print('lose')
