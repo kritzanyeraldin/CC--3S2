@@ -40,7 +40,7 @@ class Container(tk.Frame):
         self.simple_game_button = tk.Button(self.frame1, text="Simple Game", **style.menu)
         self.simple_game_button.place(x=120, y=20, width=100, height=30)
 
-        self.general_game_button = tk.Button(self.frame1, text="General Game", **style.menu)
+        self.general_game_button = tk.Button(self.frame1, text="General Game", **style.menu,state='disabled')
         self.general_game_button.place(x=270, y=20, width=100, height=30)
 
         label_board_size = tk.Label(self.frame1, text='Board size: ', **style.label)
