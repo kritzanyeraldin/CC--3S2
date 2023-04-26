@@ -68,6 +68,17 @@ class TestBoard(unittest.TestCase):
         # Volvemos a insertar otra pieza en (0,0)
         result = self.board.insert_piece(row, col, piece)
         self.assertEqual(result,'Casilla ocupada')
+        
+    # Test
+    def test_complete_row_SOS(self):
+        self.board.set_board_size(3)
+        self.board.insert_piece(0, 0, 'S')
+        self.board.insert_piece(0, 1, 'S')
+        self.board.insert_piece(0, 2, 'O')
+        self.board.insert_piece(0, 3, 'S')
+        assert self.board.complete_SOS() == True
+
+
 
 
 if __name__ == '__main__':

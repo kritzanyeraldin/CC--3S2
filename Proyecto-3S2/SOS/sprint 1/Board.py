@@ -6,39 +6,17 @@ class Board:
     def get_board_size(self):
         return self.board_size
 
+    def create_board(self):
+        self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
+        return self.board
+
     def get_piece(self, row, col):
-        if (0 <= row < self.board_size) and (0 <= col < self.board_size):
+        if (0<=row<self.board_size) and (0<=col<self.board_size):
             return self.board[row][col]
         else:
             return None
 
     def get_board(self):
-        return self.board
-
-    def board_complete(self):
-        size = self.get_board_size()
-        for row in range(size):
-            for col in range(size):
-                piece = self.get_piece(row, col)
-                if not piece is None:
-                    continue
-                else:
-                    return False
-        return True
-
-    def board_empty(self):
-        size = self.get_board_size()
-        for row in range(size):
-            for col in range(size):
-                piece = self.get_piece(row, col)
-                if piece == None:
-                   continue
-                else:
-                    return False
-        return True
-
-    def create_board(self):
-        self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
         return self.board
 
     def insert_piece(self, row, col, piece):
@@ -56,53 +34,10 @@ class Board:
         if piece not in valid_pieces:
             return 'Pieza no valida'
 
-        if not (self.get_piece(row, col) == None):
+        if not (self.get_piece(row,col) == None):
             return 'Casilla ocupada'
 
         # Asignación de la pieza al tablero
         self.board[row][col] = piece
-
-
-    def complete_SOS(self):
-        size = self.get_board_size()
-        # Verifica en fila
-        for row in range(size):
-            for col in range(size - 2):
-                if self.get_piece(row, col) == 'S' and self.get_piece(row, col+1) == 'O' and self.get_piece(row, col+2) == 'S':
-                    return True
-
-        # verifica en columna
-        for row in range(size - 2):
-            for col in range(size):
-                if self.get_piece(row, col) == 'S' and self.get_piece(row+1, col) == 'O' and self.get_piece(row+2, col) == 'S':
-                    return True
-
-        # Verifica en diagonal(es) de izquierda a derecha
-        for row in range(size - 2):
-            for col in range(size - 2):
-                if self.get_piece(row, col) == 'S' and self.get_piece(row+1, col+1) == 'O' and self.get_piece(row+2, col+2) == 'S':
-                    return True
-        # Verifica en diagonal(es) de derecha a izquierda
-        for row in range(2, size):
-            for col in range(size - 2):
-                if self.get_piece(row, col) == 'S' and self.get_piece(row-1, col+1) == 'O' and self.get_piece(row-2, col+2) == 'S':
-                    return True
-        return False
-
-    def win_or_tie(self):
-        if self.board_empty():
-            return 'Empty Board'
-        else:
-            if self.board_complete():
-                if not self.complete_SOS():
-                    return 'Tie'
-                else:
-                    return 'Win'
-            else:
-                if self.complete_SOS():
-                    return 'Win'
-                else:
-                    return 'Continue'
-
 
 
