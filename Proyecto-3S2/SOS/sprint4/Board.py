@@ -33,10 +33,10 @@ class Board:
         return self.board
 
     def size_verification(self):
-        if self.board_size >=3:
-            return True
-        else:
+        if self.board_size < 3:
             return False
+        else:
+            return True
 
     def board_complete(self):
         size = self.get_board_size()

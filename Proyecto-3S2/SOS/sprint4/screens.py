@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter.messagebox import *
 from constantes import style
 from Board import Board
+from Game import SimpleGame, GeneralGame
 
 
 class Container(tk.Frame):
@@ -20,6 +21,16 @@ class Container(tk.Frame):
         self.create_frames_button.place(x=760, y=20, width=70, height=25)
 
     def create_frames(self):
+
+        if self.entry_board_size.get() != "":
+            board = Board(self.entry_board_size.get())
+            if board.
+            if self.modeValue != None:
+                self.mode(board)
+        else:
+            showerror(title='Error',message='Ingrese un tamaño de tablero')
+
+            if
         f = Container2
         frame = f(self, self)
         self.frames[f] = frame
@@ -32,15 +43,26 @@ class Container(tk.Frame):
     def control(self):
         self.show_frame(Container2)
 
+    def mode(self,board):
+        if self.modeValue == 'Simple':
+            self.game = SimpleGame(board)
+        elif self.modeValue == 'General':
+            self.game = GeneralGame(board)
+        else:
+            return False
+        return True
+
     def init_widgets(self):
         # frame1
         self.frame1 = tk.Frame(self, bg=style.beige)
         self.frame1.place(x=0, y=0, width=760, height=60)
 
-        self.simple_game_button = tk.Button(self.frame1, text="Simple Game", **style.menu)
+        self.modeValue = tk.StringVar()
+        self.modeValue.set(None)
+        self.simple_game_button = tk.Radiobutton(self.frame1, text="Simple Game", **style.letras, variable=self.modeValue, value='Simple')
         self.simple_game_button.place(x=120, y=20, width=100, height=30)
 
-        self.general_game_button = tk.Button(self.frame1, text="General Game", **style.menu, state='disabled')
+        self.general_game_button = tk.Radiobutton(self.frame1, text="General Game", **style.letras, variable=self.modeValue, value='General')
         self.general_game_button.place(x=270, y=20, width=100, height=30)
 
         label_board_size = tk.Label(self.frame1, text='Board size: ', **style.label)

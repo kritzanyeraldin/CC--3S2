@@ -16,7 +16,7 @@ class Container(tk.Frame):
         self.init_widgets()
 
         self.frames = {}
-        self.create_frames_button = tk.Button(self, text="Start",**style.menu, command=self.create_frames)
+        self.create_frames_button = tk.Button(self, text="Start", **style.menu, command=self.create_frames)
         self.create_frames_button.place(x=760, y=20, width=70, height=25)
 
     def create_frames(self):
@@ -256,9 +256,9 @@ class Container2(tk.Frame):
 
         self.redValue = tk.StringVar()
         self.redValue.set(None)
-        self.S_red_player = tk.Radiobutton(self.frame_red_player, text='S',**style.letras, variable=self.redValue, value='S')
+        self.S_red_player = tk.Radiobutton(self.frame_red_player, text='S', **style.letras, variable=self.redValue, value='S')
         self.S_red_player.place(x=50, y=150, width=100, height=30)
-        self.O_red_player = tk.Radiobutton(self.frame_red_player, text='O',**style.letras, variable=self.redValue, value='O')
+        self.O_red_player = tk.Radiobutton(self.frame_red_player, text='O', **style.letras, variable=self.redValue, value='O')
         self.O_red_player.place(x=50, y=200, width=100, height=30)
 
         self.replay_button = tk.Button(self.frame_red_player, text='Replay',**style.menu,state='disabled')

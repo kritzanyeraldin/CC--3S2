@@ -16,7 +16,7 @@ class Board:
             return None
 
     def get_letter(self, row, col):
-        if self.get_piece(row,col)==None:
+        if self.get_piece(row, col) == None:
             return None
         else:
             if (0 <= row < self.board_size) and (0 <= col < self.board_size):
@@ -84,49 +84,58 @@ class Board:
         # Verifica en fila
         for row in range(size):
             for col in range(size - 2):
-                if self.get_piece(row, col) == ('S',self.get_player(row,col)) and self.get_piece(row, col + 1) == ('O',self.get_player(row,col)) and self.get_piece(row,
-                                                                                                                 col + 2) == ('S',self.get_player(row,col)):
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row, col + 1) == (
+                'O', self.get_player(row, col)) and self.get_piece(row,
+                                                                   col + 2) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
 
         # verifica en columna
         for row in range(size - 2):
             for col in range(size):
-                if self.get_piece(row, col) == ('S',self.get_player(row,col)) and self.get_piece(row + 1, col) ==('O',self.get_player(row,col)) and self.get_piece(
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row + 1, col) == (
+                'O', self.get_player(row, col)) and self.get_piece(
                         row + 2,
-                        col) == ('S',self.get_player(row,col)):
+                        col) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
 
         # Verifica en diagonal(es) de izquierda a derecha
         for row in range(size - 2):
             for col in range(size - 2):
-                if self.get_piece(row, col) == ('S', self.get_player(row,col)) and self.get_piece(row + 1, col + 1) == ('O',self.get_player(row,col)) and self.get_piece(
-                        row + 2, col + 2) == ('S',self.get_player(row,col)):
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row + 1,
+                                                                                                   col + 1) == (
+                'O', self.get_player(row, col)) and self.get_piece(
+                        row + 2, col + 2) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
         # Verifica en diagonal(es) de derecha a izquierda
         for row in range(2, size):
             for col in range(size - 2):
-                if self.get_piece(row, col) == ('S',self.get_player(row,col)) and self.get_piece(row - 1, col + 1) == ('O',self.get_player(row,col)) and self.get_piece(
-                        row - 2, col + 2) == ('S',self.get_player(row,col)):
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row - 1,
+                                                                                                   col + 1) == (
+                'O', self.get_player(row, col)) and self.get_piece(
+                        row - 2, col + 2) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
-        return False,'None'
+        return False, 'None'
 
     def win_or_tie(self):
         if self.board_empty():
-            return 'Empty Board','red'
+            return 'Empty Board', 'red'
         else:
             if self.board_complete():
-                complete,player = self.complete_SOS()
-                if complete:
-                    return 'Win',player
-                else:
-                    return 'Tie',player
-            else:
-                complete,player = self.complete_SOS()
+                complete, player = self.complete_SOS()
                 if complete:
                     return 'Win', player
                 else:
-                    return 'Continue',player
+                    return 'Tie', player
+            else:
+                complete, player = self.complete_SOS()
+                if complete:
+                    return 'Win', player
+                else:
+                    return 'Continue', player
 
 
-
-
+''''
+#main
+board = Board(3)
+print(board.get_board())
+'''
