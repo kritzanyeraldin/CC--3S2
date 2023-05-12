@@ -31,18 +31,20 @@ class SimpleGame(Game):
 
     def take_turn(self, turn):
         if self.board.board_empty():
-            return 'Empty Board', 'red', 'None'
+            return 'Empty Board', 'red'
         else:
             if self.board.board_complete():
-                complete_sos, player, posicion = self.board.complete_SOS()
+                complete_sos, player = \
+                    self.board.complete_SOS_simple()
                 if complete_sos:
-                    return 'Win', player, 'None'
+                    return 'Win', player
                 else:
-                    return 'Tie', player, 'None'
+                    return 'Tie', player
             else:
-                complete_sos, player, posicion = self.board.complete_SOS()
+                complete_sos, player= \
+                    self.board.complete_SOS_simple()
                 if complete_sos:
-                    return 'Win', player, 'None'
+                    return 'Win', player
                 else:
                     return 'Continue', player, self.player2 if turn == \
                                                                self.player1 \
@@ -69,7 +71,7 @@ class GeneralGame(Game):
             self.dict_sos['player2'].append(position)
         return self.dict_sos
 
-    def take_turn(self, turn):
+    def take_turn(self, turn,row,col):
         if self.board.board_empty():
             return 'Empty Board', 'red', 'None'
         else:
@@ -81,12 +83,24 @@ class GeneralGame(Game):
                 else:
                     return 'Tie', 'None', 'None'
             else:
-                complete_sos, player, position = self.board.complete_SOS()
+                complete_sos, player, position = \
+                    self.board.complete_SOS_general(row,col)
+                arr = [i for i in range(self.board.get_board_size())]
                 if complete_sos:
                     if player == self.player1:
                         for pos in self.dict_sos['player1']:
                             if pos == position:
-                                 
+                                if position[0][0] in arr:
+                                    arr.remove(position[0][0])
+                            else:
+                                self.save_sos(player, position)
+                    elif player == self.player2:
+                        for pos in self.dict_sos['player2']:
+                            if pos == position:
+                                if position[0][0] in arr:
+                                    arr.remove(position[0][0])
+                            else:
+                                self.save_sos(player, position)
                 else:
                     return 'Continue', player, self.player2 if turn == self.player1 else self.player1
 
@@ -144,5 +158,9 @@ sos_completados['player1'].append(((0, 0), (0, 1), (0, 2)))
 
 ad=sos_completados['player1']
 for s in ad:
-    if a == s:
-        print(s)
+    print(s[0][0])
+
+arr = [i for i in range(3)]
+if 2 in arr:
+    arr.remove(2)
+    print(arr)
