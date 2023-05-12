@@ -44,6 +44,7 @@ class Board:
         self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
         return self.board
 
+    # Retorna True si todas las casillas del tablero estan llenas
     def board_complete(self):
         size = self.get_board_size()
         for row in range(size):
@@ -55,6 +56,7 @@ class Board:
                     return False
         return True
 
+    # Retorna True si el tablero esta vacio
     def board_empty(self):
         size = self.get_board_size()
         for row in range(size):
@@ -96,7 +98,8 @@ class Board:
                 if self.get_letter(row, col) == 'S' and self.get_letter(row,
                                                                       col +
                                                                       1) == 'O' and self.get_letter(row, col + 2) == 'S':
-                    return True, self.get_player(row,col)
+                    return True, self.get_player(row, col), ((row, col), (row,
+                                                                       col+1), (row, col+2))
 
         # verifica en columna
         for row in range(size - 2):
@@ -105,38 +108,51 @@ class Board:
                                                                       1, col) == 'O' and self.get_letter(
                         row + 2,
                         col) == 'S':
-                    return True, self.get_player(row,col)
+                    return True, self.get_player(row,col), ((row, col), (row+1,
+                                                                       col),
+                                                            (row+2, col))
 
         # Verifica en diagonal(es) de izquierda a derecha
         for row in range(size - 2):
             for col in range(size - 2):
                 if self.get_letter(row, col) == 'S' and self.get_letter(row + 1,col + 1) == 'O' and self.get_letter(
                         row + 2, col + 2) == 'S':
-                    return True, self.get_player(row,col)
+                    return True, self.get_player(row,col), ((row, col), (row+1,
+                                                                       col+1), (row+2, col+2))
         # Verifica en diagonal(es) de derecha a izquierda
         for row in range(2, size):
             for col in range(size - 2):
                 if self.get_letter(row, col) == 'S' and self.get_letter(row - 1, col + 1) == 'O' and self.get_letter(
                         row - 2, col + 2) == 'S':
-                    return True, self.get_player(row,col)
-        return False, 'None'
+                    return True, self.get_player(row,col), ((row, col), (row-1,
+                                                                       col+1), (row-2, col+2))
+        return False, 'None', 'None'
 
-    def win_or_tie(self):
+
+
+
+
+
+
+''''
+    def win_or_tie(self, turn):
         if self.board_empty():
-            return 'Empty Board', 'red'
+            return 'Empty Board', 'red', 'None'
         else:
             if self.board_complete():
                 complete, player = self.complete_SOS()
                 if complete:
-                    return 'Win', player
+                    return 'Win', player, 'None'
                 else:
-                    return 'Tie', player
+                    return 'Tie', player, 'None'
             else:
                 complete, player = self.complete_SOS()
                 if complete:
-                    return 'Win', player
+                    return 'Win', player, 'None'
                 else:
-                    return 'Continue', player
+                    return 'Continue', player, self.player2 if turn == self.player1 else self.player1
+
+
 
 
 
@@ -148,5 +164,6 @@ board.insert_piece(0,1,'O','red')
 board.insert_piece(0,2,'S','blue')
 print(board.get_board())
 print(board.win_or_tie())
+'''''
 
 
