@@ -17,16 +17,26 @@ class Container(tk.Frame):
         self.init_widgets()
 
         self.frames = {}
-        self.create_frames_button = tk.Button(self, text="Start", **style.menu, command=self.create_frames)
+        self.create_frames_button = tk.Button(self, text="Start",
+                                              **style.menu,
+                                              command=self.create_frames)
         self.create_frames_button.place(x=760, y=20, width=70, height=25)
 
     def create_frames(self):
+        #se crea una variable frame=None
         frame = None
+
+        # Se verifica que el tamaño y modo de juego hayan sido ingresados sino
+        # se muestra un mensaje de error
         if self.entry_board_size.get() != "" and self.modeValue.get() != 'None':
 
+        # Se verifica que el tamaño ingresado sea valido (mayor igual a 3)
+        # para que se cree un tablero que sera pasado al juego con el modo
+        # que se selecciono. Tambien se crea el frame, en este caso fram2, que
+        # contiene el juego
             try:
-                print('a')
-                #self.entry_board_size.focus()
+                #print('a')
+                self.create_frames_button.focus_set()
                 board = Board(int(self.entry_board_size.get()))
                 self.mode(board)
                 frame = Container2(self, self)
@@ -34,12 +44,16 @@ class Container(tk.Frame):
 
             except ValueError:
                 showerror(title='Error', message='Tamaño invalido')
+                self.entry_board_size.delete(0, tk.END)
+                self.modeValue.set(None)
 
         else:
             self.entry_board_size.delete(0, tk.END)
             self.modeValue.set(None)
             showerror(title='Error', message='Ingrese un tamaño de tablero y seleccione un modo de juego.')
 
+        # Si frame es diferente de None quiere decir que se creo
+        # correctamente el frame2 y se debe mostrar sino sale del metodo
         if frame is None:
             pass
         else:
@@ -52,7 +66,7 @@ class Container(tk.Frame):
     def control(self):
         self.show_frame(Container2)
 
-    def mode(self,board):
+    def mode(self, board):
         if self.modeValue.get() == 'Simple':
             self.game = SimpleGame(board)
         elif self.modeValue.get() == 'General':
@@ -88,15 +102,8 @@ class Container2(tk.Frame):
         self.pack()
         self.place(x=0, y=60, width=900, height=600)
         self.configure(bg=style.beige2)
-        self.condition()
+        self.init_widgets()
         self.canvas.variable = tk.StringVar()
-
-    def condition(self):
-        if int(self.container.entry_board_size.get()) >= 3:
-            # self.create_board()
-            self.init_widgets()
-        else:
-            showerror(tittle='Error',message="Tamaño invalido.")
 
     def create_board(self):
 
@@ -110,7 +117,7 @@ class Container2(tk.Frame):
         asi que se toma el minimo valor entre ancho y altura y luego se divide entre el tamaño del tablero ingresado 
         de esta forma se logra contener el tablero en el frame board sea cual sea el tamaño que se ingrese.
         '''
-        self.board = Board(int(self.container.entry_board_size.get()))
+        self.board = self.container.game.get_board()
         self.board_size = self.board.get_board_size()
 
         frame_width = self.frame_board.winfo_width()
@@ -124,7 +131,8 @@ class Container2(tk.Frame):
 
 
 
-        self.canvas = tk.Canvas(self.frame_board, width=self.canvas_width, height=self.canvas_height)
+        self.canvas = tk.Canvas(self.frame_board, width=self.canvas_width,
+                                height=self.canvas_height)
         self.canvas.place(x=0, y=0)
         self.canvas.variable = None
 
@@ -146,13 +154,15 @@ class Container2(tk.Frame):
             x = self.canvas.canvasx(event.x)
             y = self.canvas.canvasy(event.y)
 
-            # Esta division nos indica el indice de la columna en la qu el usuario hace click
+            # Esta division nos indica el indice de la columna en la qu el
+            # usuario hace click
             col = int(x // self.cell_size)
             row = int(y // self.cell_size)
 
             print(f'inicio: {self.board.board}')
 
-            # Mientras la celda seleccionada esté ocupada, solicitar al jugador que seleccione otra celda vacía
+            # Mientras la celda seleccionada esté ocupada, solicitar al
+            # jugador que seleccione otra celda vacía
             while self.board.get_piece(row, col) is not None:
                 showinfo(tittle='Care',message='Casilla Ocupada')
                 event = self.canvas.wait_variable(self.canvas.variable)
@@ -188,12 +198,12 @@ class Container2(tk.Frame):
             self.win_or_tie('blue')
 
     def win_or_tie(self,turn):
-        complete,player = self.board.win_or_tie()
+        complete, player = self.board.win_or_tie()
         if complete == 'Empty Board':
             showinfo(title='Care',message='Continue')
         else:
             if complete == 'Continue':
-                if turn=='red':
+                if turn == 'red':
                     self.valueTurn.set('blue')
                 else:
                     self.valueTurn.set('red')
