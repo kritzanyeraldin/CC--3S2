@@ -21,20 +21,29 @@ class Container(tk.Frame):
         self.create_frames_button.place(x=760, y=20, width=70, height=25)
 
     def create_frames(self):
+        frame = None
+        if self.entry_board_size.get() != "" and self.modeValue.get() != 'None':
 
-        if self.entry_board_size.get() != "":
-            board = Board(self.entry_board_size.get())
-            if board.
-            if self.modeValue != None:
+            try:
+                print('a')
+                #self.entry_board_size.focus()
+                board = Board(int(self.entry_board_size.get()))
                 self.mode(board)
-        else:
-            showerror(title='Error',message='Ingrese un tamaño de tablero')
+                frame = Container2(self, self)
+                self.frames[Container2] = frame
 
-            if
-        f = Container2
-        frame = f(self, self)
-        self.frames[f] = frame
-        frame.tkraise()
+            except ValueError:
+                showerror(title='Error', message='Tamaño invalido')
+
+        else:
+            self.entry_board_size.delete(0, tk.END)
+            self.modeValue.set(None)
+            showerror(title='Error', message='Ingrese un tamaño de tablero y seleccione un modo de juego.')
+
+        if frame is None:
+            pass
+        else:
+            frame.tkraise()
 
     def show_frame(self, container):
         frame = self.frames[container]
@@ -44,13 +53,12 @@ class Container(tk.Frame):
         self.show_frame(Container2)
 
     def mode(self,board):
-        if self.modeValue == 'Simple':
+        if self.modeValue.get() == 'Simple':
             self.game = SimpleGame(board)
-        elif self.modeValue == 'General':
+        elif self.modeValue.get() == 'General':
             self.game = GeneralGame(board)
         else:
-            return False
-        return True
+            self.game = None
 
     def init_widgets(self):
         # frame1

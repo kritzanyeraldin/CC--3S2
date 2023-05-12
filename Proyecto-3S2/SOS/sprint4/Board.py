@@ -1,6 +1,8 @@
 class Board:
     def __init__(self, board_size):
         self.board_size = board_size
+        if not self.size_verification():
+            raise ValueError('Ingrese un tamaño valido.')
         self.board = self.create_board()
 
     def get_board_size(self):
@@ -16,7 +18,7 @@ class Board:
             return None
 
     def get_letter(self, row, col):
-        if self.get_piece(row,col)==None:
+        if self.get_piece(row, col) == None:
             return None
         else:
             if (0 <= row < self.board_size) and (0 <= col < self.board_size):
@@ -37,6 +39,10 @@ class Board:
             return False
         else:
             return True
+
+    def create_board(self):
+        self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
+        return self.board
 
     def board_complete(self):
         size = self.get_board_size()
@@ -59,11 +65,6 @@ class Board:
                 else:
                     return False
         return True
-
-    def create_board(self):
-        if self.size_verification():
-            self.board = [[None for i in range(self.board_size)] for j in range(self.board_size)]
-            return self.board
 
     def insert_piece(self, row, col, piece, player):
         # Validación del rango de las coordenadas
@@ -91,49 +92,58 @@ class Board:
         # Verifica en fila
         for row in range(size):
             for col in range(size - 2):
-                if self.get_piece(row, col) == ('S',self.get_player(row,col)) and self.get_piece(row, col + 1) == ('O',self.get_player(row,col)) and self.get_piece(row,
-                                                                                                                 col + 2) == ('S',self.get_player(row,col)):
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row, col + 1) == (
+                'O', self.get_player(row, col)) and self.get_piece(row,
+                                                                   col + 2) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
 
         # verifica en columna
         for row in range(size - 2):
             for col in range(size):
-                if self.get_piece(row, col) == ('S',self.get_player(row,col)) and self.get_piece(row + 1, col) ==('O',self.get_player(row,col)) and self.get_piece(
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row + 1, col) == (
+                'O', self.get_player(row, col)) and self.get_piece(
                         row + 2,
-                        col) == ('S',self.get_player(row,col)):
+                        col) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
 
         # Verifica en diagonal(es) de izquierda a derecha
         for row in range(size - 2):
             for col in range(size - 2):
-                if self.get_piece(row, col) == ('S', self.get_player(row,col)) and self.get_piece(row + 1, col + 1) == ('O',self.get_player(row,col)) and self.get_piece(
-                        row + 2, col + 2) == ('S',self.get_player(row,col)):
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row + 1,
+                                                                                                   col + 1) == (
+                'O', self.get_player(row, col)) and self.get_piece(
+                        row + 2, col + 2) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
         # Verifica en diagonal(es) de derecha a izquierda
         for row in range(2, size):
             for col in range(size - 2):
-                if self.get_piece(row, col) == ('S',self.get_player(row,col)) and self.get_piece(row - 1, col + 1) == ('O',self.get_player(row,col)) and self.get_piece(
-                        row - 2, col + 2) == ('S',self.get_player(row,col)):
+                if self.get_piece(row, col) == ('S', self.get_player(row, col)) and self.get_piece(row - 1,
+                                                                                                   col + 1) == (
+                'O', self.get_player(row, col)) and self.get_piece(
+                        row - 2, col + 2) == ('S', self.get_player(row, col)):
                     return True, self.get_player(row, col)
-        return False,'None'
+        return False, 'None'
 
     def win_or_tie(self):
         if self.board_empty():
-            return 'Empty Board','red'
+            return 'Empty Board', 'red'
         else:
             if self.board_complete():
-                complete,player = self.complete_SOS()
-                if complete:
-                    return 'Win',player
-                else:
-                    return 'Tie',player
-            else:
-                complete,player = self.complete_SOS()
+                complete, player = self.complete_SOS()
                 if complete:
                     return 'Win', player
                 else:
-                    return 'Continue',player
+                    return 'Tie', player
+            else:
+                complete, player = self.complete_SOS()
+                if complete:
+                    return 'Win', player
+                else:
+                    return 'Continue', player
 
 
-
-
+'''
+#main
+board = Board(2)
+print(board.create_board())
+'''''

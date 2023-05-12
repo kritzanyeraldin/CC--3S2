@@ -5,7 +5,7 @@ class Game:
     def __init__(self, board):
         self.board = board
 
-    
+
 class SimpleGame(Game):
     def __init__(self, board):
         super().__init__(board)
@@ -21,7 +21,9 @@ class GeneralGame(Game):
         pass
 
 
+'''
 # main
 board = Board(3)
 mode = SimpleGame(board)
 mode.print()
+'''''
