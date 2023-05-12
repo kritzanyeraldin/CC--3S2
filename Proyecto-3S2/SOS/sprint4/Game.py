@@ -20,8 +20,6 @@ class Game:
     def take_turn(self, turn):
         raise NotImplementedError()
 
-    def end_game(self):
-        raise NotImplementedError()
 
 
 class SimpleGame(Game):
@@ -89,6 +87,7 @@ class GeneralGame(Game):
         if var=='Point':
             return self.board.position[-1]
 
+'''
 # main
 board = Board(3)
 mode = GeneralGame(board)
@@ -132,5 +131,5 @@ print(f'\na{b.get_board()}')
 
 print(mode.take_turn('player1'))
 
-
+'''''
 
