@@ -65,13 +65,9 @@ class GeneralGame(Game):
         self.count_player2 = n
 
     def save_sos(self, player, position):
-        if player==self.player1:
-            self.dict_sos['player1'].append(position)
-        elif player==self.player2:
-            self.dict_sos['player2'].append(position)
-        return self.dict_sos
+        self.dict_sos[player].append(position)
 
-    def take_turn(self, turn,row,col):
+    def take_turn(self, turn, row, col):
         if self.board.board_empty():
             return 'Empty Board', 'red', 'None'
         else:
@@ -84,34 +80,27 @@ class GeneralGame(Game):
                     return 'Tie', 'None', 'None'
             else:
                 complete_sos, player, position = \
-                    self.board.complete_SOS_general(row,col)
-                arr = [i for i in range(self.board.get_board_size())]
+                    self.board.complete_SOS_general(row,
+                                                                       col)  # modify to only return 'complete_sos' and 'player'
                 if complete_sos:
+                    self.save_sos(player,
+                                  position)  # add the completed SOS to the player's list of SOSs
                     if player == self.player1:
-                        for pos in self.dict_sos['player1']:
-                            if pos == position:
-                                if position[0][0] in arr:
-                                    arr.remove(position[0][0])
-                            else:
-                                self.save_sos(player, position)
-                    elif player == self.player2:
-                        for pos in self.dict_sos['player2']:
-                            if pos == position:
-                                if position[0][0] in arr:
-                                    arr.remove(position[0][0])
-                            else:
-                                self.save_sos(player, position)
+                        self.count_player1 += 1  # increment the count of SOSs completed by player 1
+                    else:
+                        self.count_player2 += 1  # increment the count of SOSs completed by player 2
+                    return 'SOS completed', player, player
                 else:
                     return 'Continue', player, self.player2 if turn == self.player1 else self.player1
 
 
-''''
+
 # main
 board = Board(3)
 mode = GeneralGame(board)
 #Se establecen los jugadores
-p1 = 'blue'
-p2 = 'red'
+p1 = 'player2'
+p2 = 'player1'
 mode.players(p1, p2)
 
 # Se referencia el tablero
@@ -120,47 +109,34 @@ print(f'a{b.get_board()}')
 print(mode.get_players())
 
 # Inicia el juego
-b.insert_piece(0,0,'S','blue')
-print(mode.take_turn('blue'))
+b.insert_piece(0,0,'S','player1')
+print(mode.take_turn('player1',0,0))
 
-b.insert_piece(0,1,'O','red')
-print(mode.take_turn('red'))
+b.insert_piece(0,1,'O','player2')
+print(mode.take_turn('player2',0,1))
 
-b.insert_piece(0,2,'S','blue')
-print(mode.take_turn('blue'))
+b.insert_piece(0,2,'S','player1')
+print(mode.take_turn('player1',0,2))
 
-b.insert_piece(1,0,'S','blue')
-print(mode.take_turn('blue'))
+b.insert_piece(1,0,'S','player1')
+print(mode.take_turn('player1',1,0))
 
-b.insert_piece(1,1,'O','red')
-print(mode.take_turn('red'))
+b.insert_piece(1,1,'O','player2')
+print(mode.take_turn('player2',1,1))
 
-b.insert_piece(1,2,'S','blue')
-print(mode.take_turn('blue'))
+b.insert_piece(1,2,'S','player1')
+print(mode.take_turn('player1',1,2))
 
-b.insert_piece(2,0,'S','blue')
-print(mode.take_turn('blue'))
+b.insert_piece(2,0,'S','player1')
+print(mode.take_turn('player1',2,0))
 
-b.insert_piece(2,1,'O','red')
-print(mode.take_turn('red'))
+b.insert_piece(2,1,'O','player2')
+print(mode.take_turn('player2',2,1))
 
-b.insert_piece(2,2,'S','blue')
+b.insert_piece(2,2,'S','player1')
 print(f'\na{b.get_board()}')
 
-print(mode.take_turn('blue'))
-[(0, 0), (0, 1), (0, 2)]
-'''''
+print(mode.take_turn('player1',2,2))
 
-sos_completados = {'player1': [], 'player2': [[(1, 1), (2, 2), (3, 3)]]}
-a = ((0, 0), (0, 1), (0, 2))
 
-sos_completados['player1'].append(((0, 0), (0, 1), (0, 2)))
 
-ad=sos_completados['player1']
-for s in ad:
-    print(s[0][0])
-
-arr = [i for i in range(3)]
-if 2 in arr:
-    arr.remove(2)
-    print(arr)

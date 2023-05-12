@@ -127,11 +127,11 @@ class Board:
         size = self.get_board_size()
 
         # Verifica en fila
-        if col < size - 2:
+        if col > size - 2:
             if self.get_letter(row, col) == 'S' and self.get_letter(row,
                                                                     col + 1) == 'O' and self.get_letter(
                     row, col + 2) == 'S':
-                return 'True', self.get_player(row, col), (
+                return True, self.get_player(row, col), (
                 (row, col), (row, col + 1), (row, col + 2))
 
         # verifica en columna
@@ -139,7 +139,7 @@ class Board:
             if self.get_letter(row, col) == 'S' and self.get_letter(row + 1,
                                                                     col) == 'O' and self.get_letter(
                     row + 2, col) == 'S':
-                return 'True', self.get_player(row, col), (
+                return True, self.get_player(row, col), (
                 (row, col), (row + 1, col), (row + 2, col))
 
         # Verifica en diagonal de izquierda a derecha
@@ -147,7 +147,7 @@ class Board:
             if self.get_letter(row, col) == 'S' and self.get_letter(row + 1,
                                                                     col + 1) == 'O' and self.get_letter(
                     row + 2, col + 2) == 'S':
-                return 'True', self.get_player(row, col), (
+                return True, self.get_player(row, col), (
                 (row, col), (row + 1, col + 1), (row + 2, col + 2))
 
         # Verifica en diagonal de derecha a izquierda
@@ -155,10 +155,14 @@ class Board:
             if self.get_letter(row, col) == 'S' and self.get_letter(row - 1,
                                                                     col + 1) == 'O' and self.get_letter(
                     row - 2, col + 2) == 'S':
-                return 'True', self.get_player(row, col), (
+                return True, self.get_player(row, col), (
                 (row, col), (row - 1, col + 1), (row - 2, col + 2))
 
         return False, 'None', 'None'
+
+
+
+
 
 
 ''''
