@@ -67,33 +67,27 @@ class GeneralGame(Game):
     def save_sos(self, player, position):
         self.dict_sos[player].append(position)
 
-    def take_turn(self, turn, row, col):
+    def take_turn(self, turn):
         if self.board.board_empty():
-            return 'Empty Board', 'red', 'None'
+            return 'Empty Board'
         else:
             if self.board.board_complete():
-                if self.count_player1 > self.count_player2:
-                    return 'Win', self.player1, 'None'
-                elif self.count_player1 < self.count_player2:
-                    return 'Win', self.player2, 'None'
+                complete = self.board.complete_SOS_general()
+                if complete:
+                    return 'Point'
                 else:
-                    return 'Tie', 'None', 'None'
+                    return 'Continue'
             else:
-                complete_sos, player, position = \
-                    self.board.complete_SOS_general(row,
-                                                                       col)  # modify to only return 'complete_sos' and 'player'
-                if complete_sos:
-                    self.save_sos(player,
-                                  position)  # add the completed SOS to the player's list of SOSs
-                    if player == self.player1:
-                        self.count_player1 += 1  # increment the count of SOSs completed by player 1
-                    else:
-                        self.count_player2 += 1  # increment the count of SOSs completed by player 2
-                    return 'SOS completed', player, player
+                complete = self.board.complete_SOS_general()
+                if complete:
+                    return 'Point'
                 else:
-                    return 'Continue', player, self.player2 if turn == self.player1 else self.player1
+                    return 'Continue'
 
-
+    def get_position_line(self):
+        var=self.take_turn(0)
+        if var=='Point':
+            return self.board.position[-1]
 
 # main
 board = Board(3)
@@ -110,33 +104,33 @@ print(mode.get_players())
 
 # Inicia el juego
 b.insert_piece(0,0,'S','player1')
-print(mode.take_turn('player1',0,0))
+print(mode.take_turn('player1'))
 
 b.insert_piece(0,1,'O','player2')
-print(mode.take_turn('player2',0,1))
+print(mode.take_turn('player2'))
 
 b.insert_piece(0,2,'S','player1')
-print(mode.take_turn('player1',0,2))
+print(mode.take_turn('player1'))
 
 b.insert_piece(1,0,'S','player1')
-print(mode.take_turn('player1',1,0))
+print(mode.take_turn('player1'))
 
 b.insert_piece(1,1,'O','player2')
-print(mode.take_turn('player2',1,1))
+print(mode.take_turn('player2'))
 
 b.insert_piece(1,2,'S','player1')
-print(mode.take_turn('player1',1,2))
+print(mode.take_turn('player1'))
 
 b.insert_piece(2,0,'S','player1')
-print(mode.take_turn('player1',2,0))
+print(mode.take_turn('player1'))
 
 b.insert_piece(2,1,'O','player2')
-print(mode.take_turn('player2',2,1))
+print(mode.take_turn('player2'))
 
 b.insert_piece(2,2,'S','player1')
 print(f'\na{b.get_board()}')
 
-print(mode.take_turn('player1',2,2))
+print(mode.take_turn('player1'))
 
 
 

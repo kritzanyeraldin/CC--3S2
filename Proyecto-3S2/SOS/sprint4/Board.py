@@ -4,6 +4,7 @@ class Board:
         if not self.size_verification():
             raise ValueError('Ingrese un tamaño valido.')
         self.board = self.create_board()
+        self.position=[]
 
     def get_board_size(self):
         return self.board_size
@@ -123,42 +124,56 @@ class Board:
                     return True, self.get_player(row,col)
         return False, 'None'
 
-    def complete_SOS_general(self, row, col):
+    def complete_SOS_general(self):
+
         size = self.get_board_size()
-
         # Verifica en fila
-        if col > size - 2:
-            if self.get_letter(row, col) == 'S' and self.get_letter(row,
-                                                                    col + 1) == 'O' and self.get_letter(
-                    row, col + 2) == 'S':
-                return True, self.get_player(row, col), (
-                (row, col), (row, col + 1), (row, col + 2))
 
-        # verifica en columna
-        if row < size - 2:
-            if self.get_letter(row, col) == 'S' and self.get_letter(row + 1,
-                                                                    col) == 'O' and self.get_letter(
-                    row + 2, col) == 'S':
-                return True, self.get_player(row, col), (
-                (row, col), (row + 1, col), (row + 2, col))
-
-        # Verifica en diagonal de izquierda a derecha
-        if row < size - 2 and col < size - 2:
-            if self.get_letter(row, col) == 'S' and self.get_letter(row + 1,
-                                                                    col + 1) == 'O' and self.get_letter(
-                    row + 2, col + 2) == 'S':
-                return True, self.get_player(row, col), (
-                (row, col), (row + 1, col + 1), (row + 2, col + 2))
-
-        # Verifica en diagonal de derecha a izquierda
-        if row >= 2 and row < size and col < size - 2:
-            if self.get_letter(row, col) == 'S' and self.get_letter(row - 1,
-                                                                    col + 1) == 'O' and self.get_letter(
-                    row - 2, col + 2) == 'S':
-                return True, self.get_player(row, col), (
-                (row, col), (row - 1, col + 1), (row - 2, col + 2))
-
-        return False, 'None', 'None'
+        for row in range(size):
+            for col in range(size):
+                # Verifica en fila
+                if col < size - 2 and self.get_letter(row, col) == 'S':
+                    if self.get_letter(row, col + 1) == 'O' and self.get_letter(
+                            row, col + 2) == 'S':
+                        aux = ((row, col), (row, col + 1), (row, col + 2))
+                        if aux not in self.position:
+                            self.position.append(aux)
+                            print(self.position)
+                            return True
+                # Verifica en columna
+                if row < size and self.get_letter(row, col) == 'S':
+                    if self.get_letter(row + 1, col) == 'O' and self.get_letter(
+                            row + 2, col) == 'S':
+                        aux = ((row, col), (row + 1, col), (row + 2, col))
+                        if aux not in self.position:
+                            self.position.append(aux)
+                            print(self.position)
+                            return True
+                # Verifica en diagonal
+                if row < size - 2 and col < size - 2 and self.get_letter(row,
+                                                                         col) == 'S':
+                    if self.get_letter(row + 1,
+                                       col + 1) == 'O' and self.get_letter(
+                            row + 2, col + 2) == 'S':
+                        aux = (
+                        (row, col), (row + 1, col + 1), (row + 2, col + 2))
+                        if aux not in self.position:
+                            self.position.append(aux)
+                            print(self.position)
+                            return True
+                # Verifica en diagonal inversa
+                if row >= 2 and col < size - 2 and self.get_letter(row,
+                                                                   col) == 'S':
+                    if self.get_letter(row - 1,
+                                       col + 1) == 'O' and self.get_letter(
+                            row - 2, col + 2) == 'S':
+                        aux = (
+                        (row, col), (row - 1, col + 1), (row - 2, col + 2))
+                        if aux not in self.position:
+                            self.position.append(aux)
+                            print(self.position)
+                            return True
+        return False
 
 
 
