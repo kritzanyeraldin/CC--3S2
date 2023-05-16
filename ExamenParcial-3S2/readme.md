@@ -51,6 +51,36 @@ Luego refactorizamos nuestras subclases implementando la interfaz creada donde s
 
 ![Member](imagenes/p1/10.png)
 
+## Pregunta 2
+Empezamos implementando pruebas para limitar los valores en el eje X
+
+![Member](imagenes/p2/Requisito1//2.png)
+
+Finalmente estas serian todas la pruebas
+![Member](imagenes/p2/Requisito1//1.png)
+
+![Member](imagenes/p2/Requisito2//1.png)
+![Member](imagenes/p2/Requisito2//2.png)
+![Member](imagenes/p2/Requisito2//3.png)
+![Member](imagenes/p2/Requisito2//4.png)
+![Member](imagenes/p2/Requisito2//5.png)
+![Member](imagenes/p2/Requisito2//6.png)
+![Member](imagenes/p2/Requisito2//7.png)
+![Member](imagenes/p2/Requisito2//8.png)
+![Member](imagenes/p2/Requisito2//9.png)
+![Member](imagenes/p2/Requisito2//10.png)
+![Member](imagenes/p2/Requisito2//11.png)
+![Member](imagenes/p2/Requisito2//12.png)
+![Member](imagenes/p2/Requisito2//13.png)
+![Member](imagenes/p2/Requisito2//14.png)
+![Member](imagenes/p2/Requisito2//15.png)
+![Member](imagenes/p2/Requisito2//16.png)
+![Member](imagenes/p2/Requisito2//17.png)
+![Member](imagenes/p2/Requisito2//18.png)
+
+
+
+
 
 
 
