@@ -56,7 +56,7 @@ Luego refactorizamos nuestras subclases implementando la interfaz creada donde s
 
 
 # Pregunta 3 
-## Tomare el Sprint 2 de mi proyecto y realizare RGB
+## Tomare el Sprint 1 de mi proyecto y realizare RGB
 Primero creamos una clase Board
 
  Ahora lo que queremos es crear un prueba donde el tablero tenga un tamaño valido 3<=n y se inserte
@@ -76,27 +76,29 @@ Procedemos a realizar la implementacion para que se cree un tablero vacio de nxn
 
 Ahora realizaremos una prueba para insertar una pieza valida, es decir que solo se permita inserta S u O en una casilla valida.
 
-Empezaremos por realizar la prueba para insertar una pieza valida en una casilla valida
+Empezaremos por realizar la prueba para insertar una pieza valida en una casilla invalida.Trataremos de insertar en la posicion (3,2) una ficha valida 'O'.
+Se espera que el resultado sea: Coordenadas fuera del rango del tablero.
 ![Member](imagenes/p3/5.png)
 
 Procedemos a realizar la implementacion y vemos que pasa prueba
 ![Member](imagenes/p3/6.png)
 
-Ahora realizamos una prueba para insertar una pieza invalida, es decir que no sea de tipo string
+Ahora realizamos una prueba para insertar una pieza invalida, es decir que no sea de tipo string. Trataremos de insertar en la posicion (0,0) una pieza 4 o sea no es de tipo string. El resultado esperado es: 'La pieza deber ser de tipo string.
 
 ![Member](imagenes/p3/7.png)
 
 Procedemos a realizar la implementacion y vemos que pasa prueba
 ![Member](imagenes/p3/8.png)
 
-Ahora realizamos una prueba para insertar una pieza invalida, es decir que no sea ni O ni S
+Ahora realizamos una prueba para insertar una pieza invalida, es decir la pieza solo puede S u O. Intentaremos insertar un pieza 'W' en la poscion (0,0) el resultado espera es: Pieza no valida
 
 ![Member](imagenes/p3/9.png)
 
 Procedemos a realizar la implementacion y vemos que pasa prueba
 ![Member](imagenes/p3/10.png)
 
-Realizamos una prueba pra insertar una pieza valida en una casilla ocupada
+Realizamos una prueba pra insertar una pieza valida en una casilla ocupada.
+Intentaremos insertar una pieza valida en una casilla valida pero que ya ha sido ocupada. El resultado esperado es: 'Casilla Ocupada'
 
 ![Member](imagenes/p3/11.png)
 
