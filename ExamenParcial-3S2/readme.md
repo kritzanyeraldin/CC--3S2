@@ -59,22 +59,53 @@ Empezamos implementando pruebas para limitar los valores en el eje X
 Finalmente estas serian todas la pruebas
 ![Member](imagenes/p2/Requisito1//1.png)
 
+Realizamos la prueba para asegurarnos que el primero juagador siempre sea X
 ![Member](imagenes/p2/Requisito2//1.png)
+
+Ahor su implementacion el cual sera un simple return 'X' y pasa la prueba
 ![Member](imagenes/p2/Requisito2//2.png)
+
+Realizamos la prueba en el cual el siguiente jugador sea O 
 ![Member](imagenes/p2/Requisito2//3.png)
+
+En la implementacion crearemos una variable ultimoJugador que se inicializara en el constructor como 'O' por defecto.El metodo proximo Jugador verificara si ultimojugador es igual a X pues se actualiza y pasa a ser O sino retorna X como ultimo jugador
 ![Member](imagenes/p2/Requisito2//4.png)
+
+Vemos que pasa la prueba
 ![Member](imagenes/p2/Requisito2//5.png)
+
+El hecho de crear la prueba que verifique que despues de O siga X es innecesario por que no se implementa nada nuevo en el metodo creado anteriormente simplemente redundamos la implementacion. Es por eso que es preferible eliminarla
 ![Member](imagenes/p2/Requisito2//6.png)
-![Member](imagenes/p2/Requisito2//7.png)
+
+# Requisito 3
+
+Realizamos la prueba en la cual no exista ganador 
 ![Member](imagenes/p2/Requisito2//8.png)
-![Member](imagenes/p2/Requisito2//9.png)
+
+En su implementacion agregaremos una variable ganador en el constructor el cual se inicializara vacio '\0' el metodo ObtenerGanador simplemente lo retornara
 ![Member](imagenes/p2/Requisito2//10.png)
+Vemos que pasa la prueba
+![Member](imagenes/p2/Requisito2//9.png)
+
+Empezaremos a realizar las diversas condiciones para determinar si hay un ganador
+
+Realizamos una prueba que verifique si se obtiene un ganador cuando se completa una fila con la misma pieza
 ![Member](imagenes/p2/Requisito2//11.png)
+
+Hacemos su implementacion la cual verificara lo dicho anteriormente
 ![Member](imagenes/p2/Requisito2//12.png)
+
+Realizamos una prueba que verifique si se obtiene un ganador cuando se completa una columna con la misma pieza
 ![Member](imagenes/p2/Requisito2//13.png)
+
+Hacemos la implementacion
 ![Member](imagenes/p2/Requisito2//14.png)
+
+Realizamos una prueba para verficar la primera diagonal
 ![Member](imagenes/p2/Requisito2//15.png)
 ![Member](imagenes/p2/Requisito2//16.png)
+
+Realizamos una prueba para verificar la segunda diagonal
 ![Member](imagenes/p2/Requisito2//17.png)
 ![Member](imagenes/p2/Requisito2//18.png)
 
