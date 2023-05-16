@@ -82,12 +82,24 @@ Empezaremos por realizar la prueba para insertar una pieza valida en una casilla
 Procedemos a realizar la implementacion y vemos que pasa prueba
 ![Member](imagenes/p3/6.png)
 
+Ahora realizamos una prueba para insertar una pieza invalida, es decir que no sea de tipo string
+
 ![Member](imagenes/p3/7.png)
+
+Procedemos a realizar la implementacion y vemos que pasa prueba
 ![Member](imagenes/p3/8.png)
 
+Ahora realizamos una prueba para insertar una pieza invalida, es decir que no sea ni O ni S
+
 ![Member](imagenes/p3/9.png)
+
+Procedemos a realizar la implementacion y vemos que pasa prueba
 ![Member](imagenes/p3/10.png)
 
+Realizamos una prueba pra insertar una pieza valida en una casilla ocupada
+
 ![Member](imagenes/p3/11.png)
+
+Procedemos a realizar la implementacion y vemos que pasa prueba
 ![Member](imagenes/p3/12.png)
 
