@@ -12,7 +12,8 @@
       <change afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/Sprint2-P3/board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ExamenParcial-3S2/Sprint1-P3/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/Sprint1-P3/board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ExamenParcial-3S2/Sprint1-P3/test_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/Sprint1-P3/test_board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ExamenParcial-3S2/TicTacToe/src/main/java/Requisito2/example/ticTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/TicTacToe/src/main/java/Requisito2/example/ticTacToe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ExamenParcial-3S2/TicTacToe/src/main/java/Requisito2/example/ticTacToeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ExamenParcial-3S2/TicTacToe/src/main/java/Requisito2/example/ticTacToeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
