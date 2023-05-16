@@ -1,13 +1,9 @@
 package Requisito1Refactorizado.example;
-
-import Requisito1.example.ticTacToe;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ticTacToeTest {
-    private static Requisito1.example.ticTacToe ticTacToe;
+    private static ticTacToe ticTacToe;
     @BeforeAll
     public static void init(){
         ticTacToe = new ticTacToe();

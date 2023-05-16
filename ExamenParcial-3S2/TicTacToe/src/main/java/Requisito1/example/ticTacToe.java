@@ -22,4 +22,5 @@ public class ticTacToe {
 
         this.board[row-1][col-1]='X';
     }
+
 }
