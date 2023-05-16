@@ -59,7 +59,49 @@ class ticTacToeTest {
         assertEquals(ticTacToe.obtenerGanador(), '\0');
     }
 
+    @Test
+    public void verificarHorizontal(){
+        ticTacToe.jugar(1,1);
+        ticTacToe.jugar(2,1);
+        ticTacToe.jugar(1,2);
+        ticTacToe.jugar(2,2);
+        ticTacToe.jugar(1,3);
 
+        assertEquals(ticTacToe.obtenerGanador(),'X');
+    }
+
+    @Test
+    public void verificarVertical(){
+        ticTacToe.jugar(1,1);
+        ticTacToe.jugar(1,2);
+        ticTacToe.jugar(2,1);
+        ticTacToe.jugar(3,2);
+        ticTacToe.jugar(3,1);
+
+        assertEquals(ticTacToe.obtenerGanador(),'X');
+    }
+
+    @Test
+    public void verificarPrimeraDiagonal(){
+        ticTacToe.jugar(1,1);
+        ticTacToe.jugar(1,2);
+        ticTacToe.jugar(2,2);
+        ticTacToe.jugar(3,2);
+        ticTacToe.jugar(3,3);
+
+        assertEquals(ticTacToe.obtenerGanador(),'X');
+    }
+
+    @Test
+    public void verificarSegundaaDiagonal(){
+        ticTacToe.jugar(1,3);
+        ticTacToe.jugar(1,2);
+        ticTacToe.jugar(2,2);
+        ticTacToe.jugar(3,2);
+        ticTacToe.jugar(3,1);
+
+        assertEquals(ticTacToe.obtenerGanador(),'X');
+    }
 
 }
 

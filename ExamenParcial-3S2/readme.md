@@ -13,3 +13,12 @@
  ![Member](imagenes/7.png)
 
 
+
+
+
+
+# Pregunta 3 
+## Tomare el Sprint 2 de mi proyecto y realizare RGB
+* Primero creamos una clase Board
+* Ahora lo que queremos es crear un prueba donde el tablero tenga un tamaño valido 3<=n 
+

@@ -2,12 +2,12 @@ package Requisito2.example;
 
 public class ticTacToe {
     private char[][] board;
-    private char ultimoJugador;
+    private char ultimoJugada;
     private char ganador;
 
     public ticTacToe(){
         board = new char[3][3];
-        ultimoJugador='O';
+        ultimoJugada='O';
         ganador = '\0';
 
     }
@@ -16,7 +16,7 @@ public class ticTacToe {
         validarLimites(row,col);
         validarCasillaVacia(row,col);
         insertarPieza(row, col, proximoJugador());
-        ultimoJugador = proximoJugador();
+        ultimoJugada = proximoJugador();
         verificarGanador(row, col);
 
     }
@@ -38,9 +38,9 @@ public class ticTacToe {
     }
 
     public char proximoJugador(){
-        if (ultimoJugador == 'X') {
+        if (ultimoJugada == 'X') {
             return 'O';
-        } else if (ultimoJugador == 'O') {
+        } else if (ultimoJugada == 'O') {
             return 'X';
         } else {
             return 'X'; // Retorna 'X' si el último jugador es diferente a 'X'
@@ -48,34 +48,49 @@ public class ticTacToe {
     }
 
     public char getUltimoJugador() {
-        return ultimoJugador;
+        return ultimoJugada;
     }
 
     private void verificarGanador(int row, int col) {
-        // Verificar líneas horizontales
+        verificarHorizontales(row,col);
+
+        verificarVerticales(row,col);
+        verificarDiagonalprimera(row,col);
+        verificarDiagonalsegunda(row,col);
+
+    }
+
+    private boolean verificarHorizontales(int row, int col){
         if (board[row-1][0] == board[row-1][1] && board[row-1][0] == board[row-1][2]) {
             ganador = board[row-1][0];
-            return;
+            return true;
         }
+        return false;
+    }
 
-        // Verificar líneas verticales
-        if (board[0][col-1] == board[1][col-1] && board[0][col-1] == board[2][col-1]) {
-            ganador = board[0][col-1];
-            return;
+    private boolean verificarVerticales(int row, int col) {
+        if (board[0][col - 1] == board[1][col - 1] && board[0][col - 1] == board[2][col - 1]) {
+            ganador = board[0][col - 1];
+            return true;
+
         }
+        return false;
+    }
 
-        // Verificar diagonal principal
+    private boolean verificarDiagonalprimera(int row, int col) {
         if (row == col && board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
             ganador = board[0][0];
-            return;
+            return true;
         }
+        return false;
+    }
 
-        // Verificar diagonal secundaria
+    private boolean verificarDiagonalsegunda(int row, int col){
         if (row + col == 4 && board[0][2] == board[1][1] && board[0][2] == board[2][0]) {
             ganador = board[0][2];
-            return;
+            return true;
         }
-
+        return false;
     }
 
 
