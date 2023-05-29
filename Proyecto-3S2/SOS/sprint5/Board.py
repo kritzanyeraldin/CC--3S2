@@ -134,6 +134,8 @@ class Board:
         jugada=None
         # esta lista almacena temporalmente las letras de la fila
         sos=[]
+        # Lista
+        complete=[]
 
         # Verificacion en fila
         for j in range(col - 2, col + 1):
@@ -149,6 +151,7 @@ class Board:
                     print(j,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
+                        complete.append("".join(sos))
                         break
                     sos = []  # Reiniciar la lista sos
 
@@ -166,6 +169,7 @@ class Board:
                     print(i,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
+                        complete.append("".join(sos))
                         break
                     sos = []  # Reiniciar la lista sos
 
@@ -185,6 +189,7 @@ class Board:
                     print(i,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
+                        complete.append("".join(sos))
                         break
                     sos = []  # Reiniciar la lista sos
             colum+=1
@@ -206,26 +211,33 @@ class Board:
                     print(fila, sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
+                        complete.append("".join(sos))
                         break
                     sos = []  # Reiniciar la lista sos
             fila += 1
 
-    def win_or_tie_general(self, turn):
+        return complete, player
+
+    def win_or_tie_general(self, turn,row,col):
         if self.board_empty():
-            return 'Empty Board', 'red', 'None'
+            return 'Empty Board', 'red'
         else:
             if self.board_complete():
-                complete, player = self.complete_SOS_simple()
-                if complete:
-                    return 'Win', player, 'None'
+                count_red = len(self.dict_sos['red'])
+                count_blue = len(self.dict_sos['blue'])
+                if count_blue>count_red:
+                    return 'Win', 'red'
+                elif count_red>count_blue:
+                    return 'Win', 'blue'
                 else:
-                    return 'Tie', player, 'None'
+                    return 'Tie', 'None'
             else:
-                complete, player = self.complete_SOS_simple()
-                if complete:
-                    return 'Win', player, 'None'
+                complete, player=self.complete_SOS_general(row,col)
+                if 'SOS' in complete:
+                    return 'Continue', player
                 else:
-                    return 'Continue', player, self.player2 if turn == self.player1 else self.player1
+                    return 'Continue', player2
+
 
     '''''
     def win_or_tie(self):
