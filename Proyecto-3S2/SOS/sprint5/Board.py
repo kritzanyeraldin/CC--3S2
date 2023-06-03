@@ -128,12 +128,16 @@ class Board:
     def complete_SOS_general(self,row,col):
         # Tamaño del tablero
         size = self.get_board_size()
+
         # Guarda el jugador actual
         player=self.get_player(row,col)
+
         # Guarda la posicion de la jugada actual
         jugada=None
+
         # esta lista almacena temporalmente las letras de la fila
         sos=[]
+
         # Lista
         complete=[]
 
@@ -147,8 +151,8 @@ class Board:
                     sos.append(self.get_letter(row, j))
                     sos.append(self.get_letter(row, j + 1))
                     sos.append(self.get_letter(row, j + 2))
-                    print('fila')
-                    print(j,sos)
+                    #print('fila')
+                    #print(j,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
@@ -165,8 +169,8 @@ class Board:
                     sos.append(self.get_letter(i, col))
                     sos.append(self.get_letter(i+1, col))
                     sos.append(self.get_letter(i+2, col))
-                    print('col')
-                    print(i,sos)
+                    #print('col')
+                    #print(i,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
@@ -185,8 +189,8 @@ class Board:
                     sos.append(self.get_letter(i, colum))
                     sos.append(self.get_letter(i+1, colum+1))
                     sos.append(self.get_letter(i+2, colum+2))
-                    print('diagonal')
-                    print(i,sos)
+                    #print('diagonal')
+                    #print(i,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
@@ -197,7 +201,7 @@ class Board:
         # Verfificar diagonal inversa
         fila = row - 2
         for j in range(col + 2, col - 1, -1):
-            print(fila,j)
+            #print(fila,j)
             if j < size and j - 2 >= 0 and fila >= 0:
                 jugada = ((fila, j), (fila + 1, j - 1), (fila + 2,
                                                                  j - 2))
@@ -207,8 +211,8 @@ class Board:
                     sos.append(self.get_letter(fila, j))
                     sos.append(self.get_letter(fila + 1, j - 1))
                     sos.append(self.get_letter(fila + 2, j - 2))
-                    print('segunda diagonal')
-                    print(fila, sos)
+                    #print('segunda diagonal')
+                    #print(fila, sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
@@ -218,7 +222,7 @@ class Board:
 
         return complete, player
 
-    def win_or_tie_general(self, turn,row,col):
+    def win_or_tie_general(self,row,col):
         if self.board_empty():
             return 'Empty Board', 'red'
         else:
@@ -236,8 +240,7 @@ class Board:
                 if 'SOS' in complete:
                     return 'Continue', player
                 else:
-                    return 'Continue', player2
-
+                    return 'Continue', 'otro'
 
     '''''
     def win_or_tie(self):
@@ -257,8 +260,7 @@ class Board:
                 else:
                     return 'Continue', player
     '''''
-
-
+''''
 #main
 board = Board(4)
 print(board.create_board())
@@ -266,12 +268,21 @@ print(board.create_board())
 #board.insert_piece(0,1,'O','red')
 #primera ronda
 board.insert_piece(1,1,'S','blue')
+state,player=board.win_or_tie_general(1,1)
+print(f'{state}\n{player}\n')
+
 board.insert_piece(1,3,'S','red')
+state,player=board.win_or_tie_general(1,3)
+print(f'{state}\n{player}\n')
+
 board.insert_piece(1,2,'O','blue')
 print(board.get_board())
-board.complete_SOS_general(1,2)
+state,player=board.win_or_tie_general(1,2)
+print(f'{state}\n{player}\n')
+
 print(board.dict_sos)
 print('\n')
+
 #segunda ronda
 board.insert_piece(0,2,'S','blue')
 board.insert_piece(2,2,'S','red')
@@ -292,7 +303,7 @@ board.insert_piece(0,1,'S','red')
 print(board.get_board())
 board.complete_SOS_general(0,1)
 print(board.dict_sos)
-
+'''
 
 
 

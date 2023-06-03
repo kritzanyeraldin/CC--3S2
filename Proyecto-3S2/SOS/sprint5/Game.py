@@ -17,9 +17,8 @@ class Game:
     def get_board(self):
         return self.board
 
-    def take_turn(self, turn):
+    def take_turn(self, turn,row,col):
         raise NotImplementedError()
-
 
 
 class SimpleGame(Game):
@@ -27,7 +26,7 @@ class SimpleGame(Game):
         super().__init__(board)
         pass
 
-    def take_turn(self, turn):
+    def take_turn(self, turn,row,col):
         if self.board.board_empty():
             return 'Empty Board', 'red'
         else:
@@ -39,7 +38,7 @@ class SimpleGame(Game):
                 else:
                     return 'Tie', player
             else:
-                complete_sos, player= \
+                complete_sos, player = \
                     self.board.complete_SOS_simple()
                 if complete_sos:
                     return 'Win', player
@@ -54,7 +53,6 @@ class GeneralGame(Game):
         super().__init__(board)
         self.count_player1 = 0
         self.count_player2 = 0
-        self.dict_sos={'player1': [], 'player2': []}
 
     def set_count_player1(self, n):
         self.count_player1 = n
@@ -62,30 +60,27 @@ class GeneralGame(Game):
     def set_count_player2(self, n):
         self.count_player2 = n
 
-    def save_sos(self, player, position):
-        self.dict_sos[player].append(position)
-
-    def take_turn(self, turn):
+    def take_turn(self, turn,row, col):
         if self.board.board_empty():
-            return 'Empty Board'
+            return 'Empty Board', 'red'
         else:
             if self.board.board_complete():
-                complete = self.board.complete_SOS_general()
-                if complete:
-                    return 'Point'
+                self.set_count_player1(len(self.board.dict_sos['red']))
+                self.set_count_player2(len(self.board.dict_sos['blue']))
+                if self.count_player2 > self.count_player1:
+                    return 'Win', self.player2
+                elif self.count_player1 > self.count_player2:
+                    return 'Win', self.player1
                 else:
-                    return 'Continue'
+                    return 'Tie', 'None'
             else:
-                complete = self.board.complete_SOS_general()
-                if complete:
-                    return 'Point'
+                complete, player = self.board.complete_SOS_general(row, col)
+                if 'SOS' in complete:
+                    return 'Continue', player
                 else:
-                    return 'Continue'
+                    return 'Continue', self.player2 if player != self.player2 else self.player1
 
-    def get_position_line(self):
-        var=self.take_turn(0)
-        if var=='Point':
-            return self.board.position[-1]
+
 
 '''
 # main
@@ -132,4 +127,3 @@ print(f'\na{b.get_board()}')
 print(mode.take_turn('player1'))
 
 '''''
-
