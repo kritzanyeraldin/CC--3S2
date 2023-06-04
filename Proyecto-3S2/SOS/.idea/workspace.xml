@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77cadffd-6557-4c1e-a794-c53d97e34d36" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/Board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/Manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/Manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/constantes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/constantes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/constantes/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/constantes/style.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/imagenes/duck.png" beforeDir="false" afterPath="$PROJECT_DIR$/s5/imagenes/duck.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/screens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/test_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/s5/test_Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sprint 0/Sprint0-C3S2.docx.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sprint 1/Sprint1-C3S2.docx.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sprint 2/Sprint2-C3S2.docx.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sprint 2/videito.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sprint 3/Sprint3-C3S2.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sprint 3/Videos.rar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sprint 4/Sprint4-C3S2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sprint 4/sprint4.mp4" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
