@@ -85,7 +85,12 @@ class GeneralGame(Game):
 '''
 # main
 board = Board(3)
+
 mode = GeneralGame(board)
+a=mode.board.get_board_size()
+print(a)
+
+
 #Se establecen los jugadores
 p1 = 'player2'
 p2 = 'player1'
