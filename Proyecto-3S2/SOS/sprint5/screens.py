@@ -69,8 +69,10 @@ class Container(tk.Frame):
     def mode(self, board):
         if self.modeValue.get() == 'Simple':
             self.game = SimpleGame(board)
+            self.game.set_players('red','blue')
         elif self.modeValue.get() == 'General':
             self.game = GeneralGame(board)
+            self.game.set_players('red','blue')
         else:
             self.game = None
 
@@ -102,6 +104,7 @@ class Container2(tk.Frame):
         self.pack()
         self.place(x=0, y=60, width=900, height=600)
         self.configure(bg=style.beige2)
+        self.game = self.container.game
         self.init_widgets()
         self.canvas.variable = tk.StringVar()
 
@@ -118,7 +121,7 @@ class Container2(tk.Frame):
         de esta forma se logra contener el tablero en el frame board sea cual sea el tamaño que se ingrese.
         '''
         # self.board guardara el tablero que se inicializo en el juego
-        self.board = self.container.game.get_board()
+        self.board = self.game.get_board()
         self.board_size = self.board.get_board_size()
 
         frame_width = self.frame_board.winfo_width()
@@ -178,37 +181,35 @@ class Container2(tk.Frame):
             # Dibujamos la pieza en la posicion indicada
             self.draw_piece(self.valueTurn.get(), row, col, piece)
 
-            #self.turn()
+            self.win_or_tie(self.valueTurn.get(),row,col)
 
-            print(f'final: {self.board.board}')
+            print(f'final: {self.board.board}\n{self.valueTurn.get()}')
         else:
             showerror(title='Error',message='Seleccione una pieza')
 
-    def turn(self):
-        if self.valueTurn.get() == 'red':
 
-            self.s_blue_play.config(state='normal')
-            self.o_blue_play.config(state='normal')
-            self.s_red_play.config(state='disabled')
-            self.o_red_play.config(state='disabled')
-            self.win_or_tie('red')
-        else:
-            self.s_blue_play.config(state='disabled')
-            self.o_blue_play.config(state='disabled')
-            self.s_red_play.config(state='normal')
-            self.o_red_play.config(state='normal')
-            self.win_or_tie('blue')
-
-    def win_or_tie(self,turn):
-        complete, player = self.board.win_or_tie()
+    def win_or_tie(self,turn,row,col):
+        complete, player = self.game.take_turn(turn,row,col)
+        print(self.game.type_game())
         if complete == 'Empty Board':
             showinfo(title='Care',message='Continue')
         else:
             if complete == 'Continue':
-                if turn == 'red':
+                print(f'state: {complete}\nplayer:{player}')
+                if player != self.game.get_player1():
                     self.valueTurn.set('blue')
+                    # Activa las casillas del jugador azul
+                    self.s_blue_play.config(state='normal')
+                    self.o_blue_play.config(state='normal')
+                    self.s_red_play.config(state='disabled')
+                    self.o_red_play.config(state='disabled')
                 else:
                     self.valueTurn.set('red')
+                    # Activa las casillas del jugador rojo
+                    self.s_blue_play.config(state='disabled')
+                    self.o_blue_play.config(state='disabled')
+                    self.s_red_play.config(state='normal')
+                    self.o_red_play.config(state='normal')
             elif complete == 'Win':
                 showinfo(title='Care',message=f'{player} player win.\nCongratulations!')
             elif complete == 'Tie':

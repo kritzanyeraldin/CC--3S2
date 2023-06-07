@@ -7,12 +7,15 @@ class Game:
         self.player1 = None
         self.player2 = None
 
-    def players(self, player1, player2):
+    def set_players(self, player1, player2):
         self.player1 = player1
         self.player2 = player2
 
-    def get_players(self):
-        return self.player1, self.player2
+    def get_player1(self):
+        return self.player1
+
+    def get_player2(self):
+        return self.player2
 
     def get_board(self):
         return self.board
@@ -26,27 +29,24 @@ class SimpleGame(Game):
         super().__init__(board)
         pass
 
+    def type_game(self):
+        return 'Simple'
+
     def take_turn(self, turn,row,col):
         if self.board.board_empty():
-            return 'Empty Board', 'red'
+            return 'Empty Board', self.player1
         else:
+            complete_sos, player = self.board.complete_SOS_simple()
             if self.board.board_complete():
-                complete_sos, player = \
-                    self.board.complete_SOS_simple()
                 if complete_sos:
                     return 'Win', player
                 else:
                     return 'Tie', player
             else:
-                complete_sos, player = \
-                    self.board.complete_SOS_simple()
                 if complete_sos:
                     return 'Win', player
                 else:
-                    return 'Continue', player, self.player2 if turn == \
-                                                               self.player1 \
-                        else self.player1
-
+                    return 'Continue', self.player2 if turn !=self.player2 else self.player1
 
 class GeneralGame(Game):
     def __init__(self, board):
@@ -54,6 +54,8 @@ class GeneralGame(Game):
         self.count_player1 = 0
         self.count_player2 = 0
 
+    def type_game(self):
+        return 'general'
     def set_count_player1(self, n):
         self.count_player1 = n
 
@@ -62,7 +64,7 @@ class GeneralGame(Game):
 
     def take_turn(self, turn,row, col):
         if self.board.board_empty():
-            return 'Empty Board', 'red'
+            return 'Empty Board', self.player1
         else:
             if self.board.board_complete():
                 self.set_count_player1(len(self.board.dict_sos['red']))
@@ -79,7 +81,6 @@ class GeneralGame(Game):
                     return 'Continue', player
                 else:
                     return 'Continue', self.player2 if player != self.player2 else self.player1
-
 
 
 '''
