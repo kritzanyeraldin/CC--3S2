@@ -181,21 +181,20 @@ class Container2(tk.Frame):
             # Dibujamos la pieza en la posicion indicada
             self.draw_piece(self.valueTurn.get(), row, col, piece)
 
-            self.win_or_tie(self.valueTurn.get(),row,col)
+            self.check_status(self.valueTurn.get(), row, col)
 
             print(f'final: {self.board.board}\n{self.valueTurn.get()}')
         else:
-            showerror(title='Error',message='Seleccione una pieza')
+            showerror(title='Error', message='Seleccione una pieza')
 
-
-    def win_or_tie(self,turn,row,col):
-        complete, player = self.game.take_turn(turn,row,col)
+    def check_status(self, turn, row, col):
+        state, player = self.game.take_turn(turn, row, col)
         print(self.game.type_game())
-        if complete == 'Empty Board':
-            showinfo(title='Care',message='Continue')
+        if state == 'Empty Board':
+            showinfo(title='Care', message='Continue')
         else:
-            if complete == 'Continue':
-                print(f'state: {complete}\nplayer:{player}')
+            if state == 'Continue':
+                print(f'state: {state}\nplayer:{player}')
                 if player != self.game.get_player1():
                     self.valueTurn.set('blue')
                     # Activa las casillas del jugador azul
@@ -210,9 +209,9 @@ class Container2(tk.Frame):
                     self.o_blue_play.config(state='disabled')
                     self.s_red_play.config(state='normal')
                     self.o_red_play.config(state='normal')
-            elif complete == 'Win':
+            elif state == 'Win':
                 showinfo(title='Care',message=f'{player} player win.\nCongratulations!')
-            elif complete == 'Tie':
+            elif state == 'Tie':
                 showinfo(title='Care',message='Tie.\nTry again')
 
     def select_piece(self):
@@ -250,9 +249,6 @@ class Container2(tk.Frame):
             return False
         return True
 
-
-
-
     def draw_piece(self, valueTurn, row, col, piece):
         if piece == 'S':
             self.board.insert_piece(row, col, piece,valueTurn)
@@ -268,7 +264,7 @@ class Container2(tk.Frame):
             elif valueTurn == 'blue':
                 self.s_blue_play.deselect()
         elif piece == 'O':
-            self.board.insert_piece(row, col, piece,valueTurn)
+            self.board.insert_piece(row, col, piece, valueTurn)
             self.canvas.create_text(
                 (col + 0.5) * self.cell_size,
                 (row + 0.5) * self.cell_size,

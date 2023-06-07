@@ -1,10 +1,13 @@
+import random
+
+
 class Board:
     def __init__(self, board_size):
         self.board_size = board_size
         if not self.size_verification():
             raise ValueError('Ingrese un tamaño valido.')
         self.board = self.create_board()
-        self.dict_sos={'red':[],'blue':[]}
+        self.dict_sos = {'red': [], 'blue': []}
 
     def get_board_size(self):
         return self.board_size
@@ -70,6 +73,9 @@ class Board:
                     return False
         return True
 
+    def cell_empty(self,row,col):
+        self.board[row][col]='None'
+
     def insert_piece(self, row, col, piece, player):
         # Validación del rango de las coordenadas
         if not (0 <= row < self.board_size) or not (0 <= col < self.board_size):
@@ -91,55 +97,54 @@ class Board:
         # Asignación de la pieza al tablero
         self.board[row][col] = (piece, player)
 
-    #Retorna si completo un SOS y el jugador que lo hizo
+    # Retorna si completo un SOS y el jugador que lo hizo
     def complete_SOS_simple(self):
         size = self.get_board_size()
         # Verifica en fila
         for row in range(size):
             for col in range(size - 2):
                 if self.get_letter(row, col) == 'S' and self.get_letter(row,
-                                                                      col +
-                                                                      1) == 'O' and self.get_letter(row, col + 2) == 'S':
+                                                                        col +
+                                                                        1) == 'O' and self.get_letter(row, col + 2) == 'S':
                     return True, self.get_player(row, col)
 
         # verifica en columna
         for row in range(size - 2):
             for col in range(size):
-                if self.get_letter(row, col) == 'S' and self.get_letter(row +
-                                                                      1, col) == 'O' and self.get_letter(
-                        row + 2,
-                        col) == 'S':
-                    return True, self.get_player(row,col)
+                if self.get_letter(row, col) == 'S' and self.get_letter(row + 1, col) == 'O' and self.get_letter(row + 2,
+                                                                                                                 col) == 'S':
+                    return True, self.get_player(row, col)
 
         # Verifica en diagonal(es) de izquierda a derecha
         for row in range(size - 2):
             for col in range(size - 2):
-                if self.get_letter(row, col) == 'S' and self.get_letter(row + 1,col + 1) == 'O' and self.get_letter(
+                if self.get_letter(row, col) == 'S' and self.get_letter(row + 1, col + 1) == 'O' and self.get_letter(
                         row + 2, col + 2) == 'S':
-                    return True, self.get_player(row,col)
+                    return True, self.get_player(row, col)
+
         # Verifica en diagonal(es) de derecha a izquierda
         for row in range(2, size):
             for col in range(size - 2):
                 if self.get_letter(row, col) == 'S' and self.get_letter(row - 1, col + 1) == 'O' and self.get_letter(
                         row - 2, col + 2) == 'S':
-                    return True, self.get_player(row,col)
+                    return True, self.get_player(row, col)
         return False, 'None'
 
-    def complete_SOS_general(self,row,col):
+    def complete_SOS_general(self, row, col):
         # Tamaño del tablero
         size = self.get_board_size()
 
         # Guarda el jugador actual
-        player=self.get_player(row,col)
+        player = self.get_player(row, col)
 
         # Guarda la posicion de la jugada actual
-        jugada=None
+        jugada = None
 
         # esta lista almacena temporalmente las letras de la fila
-        sos=[]
+        sos = []
 
         # Lista
-        complete=[]
+        complete = []
 
         # Verificacion en fila
         for j in range(col - 2, col + 1):
@@ -151,8 +156,8 @@ class Board:
                     sos.append(self.get_letter(row, j))
                     sos.append(self.get_letter(row, j + 1))
                     sos.append(self.get_letter(row, j + 2))
-                    #print('fila')
-                    #print(j,sos)
+                    # print('fila')
+                    # print(j,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
@@ -162,57 +167,56 @@ class Board:
         # Verificacion en columna
         for i in range(row - 2, row + 1):
             if i >= 0 and i + 2 < size:
-                jugada = ((i, col), (i+1, col), (i+2, col))
+                jugada = ((i, col), (i + 1, col), (i + 2, col))
                 if (jugada not in self.dict_sos['red']) and (jugada not in
                                                              self.dict_sos[
                                                                  'blue']):
                     sos.append(self.get_letter(i, col))
-                    sos.append(self.get_letter(i+1, col))
-                    sos.append(self.get_letter(i+2, col))
-                    #print('col')
-                    #print(i,sos)
+                    sos.append(self.get_letter(i + 1, col))
+                    sos.append(self.get_letter(i + 2, col))
+                    # print('col')
+                    # print(i,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
                         break
                     sos = []  # Reiniciar la lista sos
-
 
         # Verfificar en diagonal principal
         colum = col - 2
         for i in range(row - 2, row + 1):
             if i >= 0 and i + 2 < size and colum >= 0:
-                jugada = ((i, colum), (i+1, colum+1), (i+2, colum+2))
+                jugada = ((i, colum), (i + 1, colum + 1), (i + 2, colum + 2))
                 if (jugada not in self.dict_sos['red']) and (jugada not in
                                                              self.dict_sos[
                                                                  'blue']):
                     sos.append(self.get_letter(i, colum))
-                    sos.append(self.get_letter(i+1, colum+1))
-                    sos.append(self.get_letter(i+2, colum+2))
-                    #print('diagonal')
-                    #print(i,sos)
+                    sos.append(self.get_letter(i + 1, colum + 1))
+                    sos.append(self.get_letter(i + 2, colum + 2))
+                    # print('diagonal')
+                    # print(i,sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
                         break
                     sos = []  # Reiniciar la lista sos
-            colum+=1
+            colum += 1
 
         # Verfificar diagonal inversa
         fila = row - 2
         for j in range(col + 2, col - 1, -1):
-            #print(fila,j)
+            # print(fila,j)
             if j < size and j - 2 >= 0 and fila >= 0:
                 jugada = ((fila, j), (fila + 1, j - 1), (fila + 2,
-                                                                 j - 2))
+                                                         j - 2))
                 if (jugada not in self.dict_sos['red']) and (jugada not in
                                                              self.dict_sos[
-                                                                     'blue']):
+                                                                 'blue']):
                     sos.append(self.get_letter(fila, j))
                     sos.append(self.get_letter(fila + 1, j - 1))
                     sos.append(self.get_letter(fila + 2, j - 2))
-                    #print('segunda diagonal')
-                    #print(fila, sos)
+                    # print('segunda diagonal')
+                    # print(fila, sos)
                     if "".join(sos) == 'SOS':
                         self.dict_sos[player].append(jugada)
                         complete.append("".join(sos))
@@ -221,6 +225,60 @@ class Board:
             fila += 1
 
         return complete, player
+
+    def computer_move(self):
+        # Obtener una lista de las casillas vacías en el tablero
+        empty_cells = []
+        size = self.get_board_size()
+        for row in range(size):
+            for col in range(size):
+                if self.get_piece(row, col) == 'None':
+                    empty_cells.append((row, col))
+
+        if len(empty_cells) == 0:
+            return 'No hay movimientos disponibles'
+
+        # Verificar si hay algún movimiento que complete un SOS
+        for row, col in empty_cells:
+            # Probar colocando la pieza 'S'
+            self.insert_piece(row, col, 'S', 'Blue')
+            if self.complete_SOS_simple()[0]:
+                return f'La computadora ha colocado la pieza S en la casilla ({row}, {col}) y ha ganado'
+
+            # Probar colocando la pieza 'O'
+            self.insert_piece(row, col, 'O', 'Blue')
+            if self.complete_SOS_simple()[0]:
+                return f'La computadora ha colocado la pieza O en la casilla ({row}, {col}) y ha ganado'
+
+            # Si no completa un SOS, revertir el movimiento y seguir probando
+            self.cell_empty(row, col)
+
+        # Si no se puede ganar en este movimiento, seleccionar una casilla vacía al azar
+        row, col = random.choice(empty_cells)
+        print(row,col)
+        # Determinar la pieza que colocará la computadora (S u O)
+        piece = random.choice(['S', 'O'])
+
+        # Realizar el movimiento
+        self.insert_piece(row, col, piece, 'blue')
+
+        return f'La computadora ha colocado la pieza {piece} en la casilla ({row}, {col})'
+
+
+board = Board(3)
+print(board.create_board())
+board.insert_piece(0,0,'S','red')
+board.computer_move()
+print(board.get_board())
+
+board.insert_piece(2,2,'S','red')
+board.computer_move()
+print(board.get_board())
+
+
+
+
+'''''
 
     def win_or_tie_general(self,row,col):
         if self.board_empty():
@@ -242,7 +300,7 @@ class Board:
                 else:
                     return 'Continue', 'otro'
 
-    '''''
+    
     def win_or_tie(self):
         if self.board_empty():
             return 'Empty Board', 'red'
@@ -259,8 +317,7 @@ class Board:
                     return 'Win', player
                 else:
                     return 'Continue', player
-    '''''
-''''
+ 
 #main
 board = Board(4)
 print(board.create_board())
@@ -304,7 +361,3 @@ print(board.get_board())
 board.complete_SOS_general(0,1)
 print(board.dict_sos)
 '''
-
-
-
-
