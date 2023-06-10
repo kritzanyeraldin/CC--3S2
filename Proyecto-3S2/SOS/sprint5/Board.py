@@ -91,11 +91,11 @@ class Board:
         if piece not in valid_pieces:
             return 'Pieza no valida'
 
-        if not self.get_piece(row, col) == 'None':
+        if  self.get_piece(row, col) != 'None':
             return 'Casilla ocupada'
 
         # Asignación de la pieza al tablero
-        self.board[row][col] = (piece, player)
+        self.board[row][col] = (piece, player)  
 
     # Retorna si completo un SOS y el jugador que lo hizo
     def complete_SOS_simple(self):
@@ -237,16 +237,21 @@ class Board:
 
         if len(empty_cells) == 0:
             return 'No hay movimientos disponibles'
+        print(empty_cells)
 
         # Verificar si hay algún movimiento que complete un SOS
         for row, col in empty_cells:
+            #print(row,col)
             # Probar colocando la pieza 'S'
             self.insert_piece(row, col, 'S', 'Blue')
             if self.complete_SOS_simple()[0]:
                 return f'La computadora ha colocado la pieza S en la casilla ({row}, {col}) y ha ganado'
 
+            #print(self.get_piece(row,col))
+            self.cell_empty(row, col)
             # Probar colocando la pieza 'O'
             self.insert_piece(row, col, 'O', 'Blue')
+            #print(self.get_piece(row, col))
             if self.complete_SOS_simple()[0]:
                 return f'La computadora ha colocado la pieza O en la casilla ({row}, {col}) y ha ganado'
 
@@ -255,7 +260,7 @@ class Board:
 
         # Si no se puede ganar en este movimiento, seleccionar una casilla vacía al azar
         row, col = random.choice(empty_cells)
-        print(row,col)
+        #print(row,col)
         # Determinar la pieza que colocará la computadora (S u O)
         piece = random.choice(['S', 'O'])
 
@@ -274,6 +279,7 @@ print(board.get_board())
 board.insert_piece(2,2,'S','red')
 board.computer_move()
 print(board.get_board())
+
 
 
 
