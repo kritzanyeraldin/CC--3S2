@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77cadffd-6557-4c1e-a794-c53d97e34d36" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sprint5/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint5/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint5/Board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint5/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint5/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint5/Game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,22 +30,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/KRITZAN/Documents/GitHub/CC-3S2/Proyecto-3S2/SOS"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/KRITZAN/Documents/GitHub/CC-3S2/Proyecto-3S2/SOS&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS" />
       <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS\sprint2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS\sprint5" />
       <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS\s5" />
       <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS\sprint3" />
       <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS\sprint 1" />

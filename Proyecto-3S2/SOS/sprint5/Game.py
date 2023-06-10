@@ -1,5 +1,5 @@
 from Board import Board
-
+from player import ComputerPlayer,HumanPlayer
 
 class Game:
     def __init__(self, board):
@@ -62,6 +62,11 @@ class GeneralGame(Game):
     def set_count_player2(self, n):
         self.count_player2 = n
 
+
+    def do_move(self):
+        pass
+
+
     def take_turn(self, turn,row, col):
         if self.board.board_empty():
             return 'Empty Board', self.player1
@@ -81,6 +86,7 @@ class GeneralGame(Game):
                     return 'Continue', player
                 else:
                     return 'Continue', self.player2 if player != self.player2 else self.player1
+
 
 
 '''

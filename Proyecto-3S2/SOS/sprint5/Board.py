@@ -226,50 +226,9 @@ class Board:
 
         return complete, player
 
-    def computer_move(self):
-        # Obtener una lista de las casillas vacías en el tablero
-        empty_cells = []
-        size = self.get_board_size()
-        for row in range(size):
-            for col in range(size):
-                if self.get_piece(row, col) == 'None':
-                    empty_cells.append((row, col))
-
-        if len(empty_cells) == 0:
-            return 'No hay movimientos disponibles'
-        print(empty_cells)
-
-        # Verificar si hay algún movimiento que complete un SOS
-        for row, col in empty_cells:
-            #print(row,col)
-            # Probar colocando la pieza 'S'
-            self.insert_piece(row, col, 'S', 'Blue')
-            if self.complete_SOS_simple()[0]:
-                return f'La computadora ha colocado la pieza S en la casilla ({row}, {col}) y ha ganado'
-
-            #print(self.get_piece(row,col))
-            self.cell_empty(row, col)
-            # Probar colocando la pieza 'O'
-            self.insert_piece(row, col, 'O', 'Blue')
-            #print(self.get_piece(row, col))
-            if self.complete_SOS_simple()[0]:
-                return f'La computadora ha colocado la pieza O en la casilla ({row}, {col}) y ha ganado'
-
-            # Si no completa un SOS, revertir el movimiento y seguir probando
-            self.cell_empty(row, col)
-
-        # Si no se puede ganar en este movimiento, seleccionar una casilla vacía al azar
-        row, col = random.choice(empty_cells)
-        #print(row,col)
-        # Determinar la pieza que colocará la computadora (S u O)
-        piece = random.choice(['S', 'O'])
-
-        # Realizar el movimiento
-        self.insert_piece(row, col, piece, 'blue')
-
-        return f'La computadora ha colocado la pieza {piece} en la casilla ({row}, {col})'
 
 
+''''
 board = Board(3)
 print(board.create_board())
 board.insert_piece(0,0,'S','red')
@@ -283,8 +242,6 @@ print(board.get_board())
 
 
 
-
-'''''
 
     def win_or_tie_general(self,row,col):
         if self.board_empty():
