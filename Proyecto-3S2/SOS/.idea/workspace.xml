@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77cadffd-6557-4c1e-a794-c53d97e34d36" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sprint5/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint5/Board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint5/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprint5/Game.py" afterDir="false" />
-    </list>
+    <list default="true" id="77cadffd-6557-4c1e-a794-c53d97e34d36" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +32,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/KRITZAN/Documents/GitHub/CC-3S2/Proyecto-3S2/SOS&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/KRITZAN/Downloads/bricks-breaker&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -53,7 +48,7 @@
       <recent name="C:\Users\KRITZAN\Documents\GitHub\CC-3S2\Proyecto-3S2\SOS\sprint2" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SOS" />
       <option name="INTERPRETER_OPTIONS" value="" />

@@ -3,6 +3,7 @@ from tkinter.messagebox import *
 from constantes import style
 from Board import Board
 from Game import SimpleGame, GeneralGame
+from computer import Computer
 
 
 class Container(tk.Frame):
@@ -69,10 +70,8 @@ class Container(tk.Frame):
     def mode(self, board):
         if self.modeValue.get() == 'Simple':
             self.game = SimpleGame(board)
-            self.game.set_players('red','blue')
         elif self.modeValue.get() == 'General':
             self.game = GeneralGame(board)
-            self.game.set_players('red','blue')
         else:
             self.game = None
 
@@ -149,10 +148,14 @@ class Container2(tk.Frame):
                 y1 = (row + 1) * self.cell_size
                 self.canvas.create_rectangle(x0, y0, x1, y1, fill='white', tags='cell')
 
-                # dibuja las piezas
+
                 self.canvas.tag_bind('cell', '<Button-1>', self.on_cell_clicked)
 
+
+
+
     def on_cell_clicked(self, event):
+
         piece = self.select_piece()
 
         # Si se ha seleccionado una pieza entonces se dibujara en el tablero sino retorna un mensaje de error
@@ -197,18 +200,34 @@ class Container2(tk.Frame):
                 print(f'state: {state}\nplayer:{player}')
                 if player != self.game.get_player1():
                     self.valueTurn.set('blue')
-                    # Activa las casillas del jugador azul
-                    self.s_blue_play.config(state='normal')
-                    self.o_blue_play.config(state='normal')
-                    self.s_red_play.config(state='disabled')
-                    self.o_red_play.config(state='disabled')
+                    if self.bluetype.get() == 'Computer':
+                        self.computer.move('blue')
+                        row, col = self.computer.get_cells()
+                        piece = self.computer.get_piece()
+                        # Dibujamos la pieza en la posicion indicada
+                        self.draw_piece(self.valueTurn.get(), row, col, piece,computer=True)
+                        self.valueTurn.set('red')
+                    else:
+                        # Activa las casillas del jugador azul
+                        self.s_blue_play.config(state='normal')
+                        self.o_blue_play.config(state='normal')
+                        self.s_red_play.config(state='disabled')
+                        self.o_red_play.config(state='disabled')
                 else:
                     self.valueTurn.set('red')
-                    # Activa las casillas del jugador rojo
-                    self.s_blue_play.config(state='disabled')
-                    self.o_blue_play.config(state='disabled')
-                    self.s_red_play.config(state='normal')
-                    self.o_red_play.config(state='normal')
+                    if self.bluetype.get() == 'Computer':
+                        self.computer.move('red')
+                        row, col = self.computer.get_cells()
+                        piece = self.computer.get_piece()
+                        # Dibujamos la pieza en la posicion indicada
+                        self.draw_piece(self.valueTurn.get(), row, col, piece,computer=True)
+                        self.valueTurn.set('blue')
+                    else:
+                        # Activa las casillas del jugador rojo
+                        self.s_blue_play.config(state='disabled')
+                        self.o_blue_play.config(state='disabled')
+                        self.s_red_play.config(state='normal')
+                        self.o_red_play.config(state='normal')
             elif state == 'Win':
                 showinfo(title='Care',message=f'{player} player win.\nCongratulations!')
             elif state == 'Tie':
@@ -232,24 +251,13 @@ class Container2(tk.Frame):
             self.bluetype.set('None')
             showerror(title='Error', message='Seleccione el tipo de jugador')
 
+
     def select_player_type(self):
-        if self.bluetype.get() == 'Human' and self.redtype.get() == 'Human':
-            self.computer_blue.config(state='disabled')
-            self.computer_red.config(state='disabled')
-        elif self.redtype.get() == 'Computer' and self.bluetype.get() == 'Human':
-            self.human_red.config(state='disabled')
-            self.computer_blue.config(state='disabled')
-        elif self.redtype.get() == 'Human' and self.bluetype.get() == 'Computer':
-            self.computer_red.config(state='disabled')
-            self.human_blue.config(state='disabled')
-        elif self.redtype.get() == 'Computer' and self.bluetype.get() == 'Computer':
-            self.human_red.config(state='disabled')
-            self.human_blue.config(state='disabled')
-        else:
+        if self.bluetype.get() == 'None' and self.redtype.get() == 'None':
             return False
         return True
 
-    def draw_piece(self, valueTurn, row, col, piece):
+    def draw_piece(self, valueTurn, row, col, piece,computer=False):
         if piece == 'S':
             self.board.insert_piece(row, col, piece,valueTurn)
             self.canvas.create_text(
@@ -276,6 +284,40 @@ class Container2(tk.Frame):
                 self.o_red_play.deselect()
             elif valueTurn == 'blue':
                 self.o_blue_play.deselect()
+        if computer:
+            self.canvas.create_text(
+                (col + 0.5) * self.cell_size,
+                (row + 0.5) * self.cell_size,
+                text=piece,
+                font=('Arial', 32),
+                fill=valueTurn
+            )
+            if valueTurn=='red':
+                self.o_blue_play.config(state='normal')
+                self.s_blue_play.config(state='normal')
+            elif valueTurn=='blue':
+                self.s_red_play.config(state='normal')
+                self.o_red_play.config(state='normal')
+
+    def disable_red(self):
+        self.human_red.config(state=tk.DISABLED)
+        self.computer=Computer(self.game)
+        self.s_red_play.config(state=tk.DISABLED)
+        self.o_red_play.config(state=tk.DISABLED)
+        self.computer.move('red')
+        row, col = self.computer.get_cells()
+        piece = self.computer.get_piece()
+        print(piece)
+        # Dibujamos la pieza en la posicion indicada
+        self.draw_piece(self.valueTurn.get(), row, col, piece,computer=True)
+
+        self.valueTurn.set('blue')
+
+    def disable_blue(self):
+        self.human_blue.config(state=tk.DISABLED)
+        self.s_blue_play.config(state=tk.DISABLED)
+        self.o_blue_play.config(state=tk.DISABLED)
+        self.computer=Computer(self.game)
 
     def init_widgets(self):
 
@@ -305,10 +347,10 @@ class Container2(tk.Frame):
         self.bluetype = tk.StringVar()
         self.bluetype.set('None')
         self.human_blue=tk.Radiobutton(self.frame_blue_player, text='Human', **style.letras, variable=self.bluetype,
-                                       value='Human')
+                                       value='Human', command=lambda : self.computer_blue.config(state=tk.DISABLED))
         self.human_blue.place(x=30,y=100,width=100,height=30)
         self.computer_blue = tk.Radiobutton(self.frame_blue_player, text='Computer', **style.letras, variable=self.bluetype,
-                                            value='Computer')
+                                            value='Computer', command=lambda : self.disable_blue() )
         self.computer_blue.place(x=30, y=250, width=100, height=30)
         
 
@@ -321,14 +363,19 @@ class Container2(tk.Frame):
         self.o_blue_play.place(x=50, y=200, width=100, height=30)
 
         ##
+        # #
+        # frame red_player(210x500)
+        label_red_player = tk.Label(self.frame_red_player, text='Red Player', **style.red)
+        label_red_player.place(x=30, y=50, width=100, height=30)
+
         # tipo de jugador
         self.redtype = tk.StringVar()
         self.redtype.set('None')
         self.human_red = tk.Radiobutton(self.frame_red_player, text='Human', **style.letras, variable=self.redtype,
-                                        value='Human')
+                                        value='Human', command=lambda: self.computer_red.config(state=tk.DISABLED))
         self.human_red.place(x=30, y=100, width=100, height=30)
         self.computer_red = tk.Radiobutton(self.frame_red_player, text='Computer', **style.letras, variable=self.redtype,
-                                           value='Computer')
+                                           value='Computer', command=lambda : self.disable_red())
         self.computer_red.place(x=30, y=250, width=100, height=30)
 
         self.redValue = tk.StringVar()

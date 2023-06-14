@@ -1,16 +1,9 @@
-from Board import Board
-from player import ComputerPlayer,HumanPlayer
 
 class Game:
     def __init__(self, board):
         self.board = board
-        self.player1 = None
-        self.player2 = None
-
-    def set_players(self, player1, player2):
-        self.player1 = player1
-        self.player2 = player2
-
+        self.player1 = 'red'
+        self.player2 = 'blue'
     def get_player1(self):
         return self.player1
 
@@ -55,16 +48,12 @@ class GeneralGame(Game):
         self.count_player2 = 0
 
     def type_game(self):
-        return 'general'
+        return 'General'
     def set_count_player1(self, n):
         self.count_player1 = n
 
     def set_count_player2(self, n):
         self.count_player2 = n
-
-
-    def do_move(self):
-        pass
 
 
     def take_turn(self, turn,row, col):
@@ -77,11 +66,13 @@ class GeneralGame(Game):
                 if self.count_player2 > self.count_player1:
                     return 'Win', self.player2
                 elif self.count_player1 > self.count_player2:
+                    print(f'Movimientos: {self.board.dict_sos}')
                     return 'Win', self.player1
                 else:
                     return 'Tie', 'None'
             else:
                 complete, player = self.board.complete_SOS_general(row, col)
+                print(player,complete)
                 if 'SOS' in complete:
                     return 'Continue', player
                 else:

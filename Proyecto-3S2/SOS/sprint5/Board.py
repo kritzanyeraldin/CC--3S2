@@ -130,7 +130,7 @@ class Board:
                     return True, self.get_player(row, col)
         return False, 'None'
 
-    def complete_SOS_general(self, row, col):
+    def complete_SOS_general(self, row, col,computer=False):
         # Tamaño del tablero
         size = self.get_board_size()
 
@@ -159,9 +159,13 @@ class Board:
                     # print('fila')
                     # print(j,sos)
                     if "".join(sos) == 'SOS':
-                        self.dict_sos[player].append(jugada)
-                        complete.append("".join(sos))
-                        break
+                        if computer:
+                            complete.append("".join(sos))
+                            break
+                        else:
+                            self.dict_sos[player].append(jugada)
+                            complete.append("".join(sos))
+                            break
                     sos = []  # Reiniciar la lista sos
 
         # Verificacion en columna
@@ -177,9 +181,13 @@ class Board:
                     # print('col')
                     # print(i,sos)
                     if "".join(sos) == 'SOS':
-                        self.dict_sos[player].append(jugada)
-                        complete.append("".join(sos))
-                        break
+                        if computer:
+                            complete.append("".join(sos))
+                            break
+                        else:
+                            self.dict_sos[player].append(jugada)
+                            complete.append("".join(sos))
+                            break
                     sos = []  # Reiniciar la lista sos
 
         # Verfificar en diagonal principal
@@ -196,9 +204,13 @@ class Board:
                     # print('diagonal')
                     # print(i,sos)
                     if "".join(sos) == 'SOS':
-                        self.dict_sos[player].append(jugada)
-                        complete.append("".join(sos))
-                        break
+                        if computer:
+                            complete.append("".join(sos))
+                            break
+                        else:
+                            self.dict_sos[player].append(jugada)
+                            complete.append("".join(sos))
+                            break
                     sos = []  # Reiniciar la lista sos
             colum += 1
 
@@ -218,30 +230,23 @@ class Board:
                     # print('segunda diagonal')
                     # print(fila, sos)
                     if "".join(sos) == 'SOS':
-                        self.dict_sos[player].append(jugada)
-                        complete.append("".join(sos))
-                        break
+                        if computer:
+                            complete.append("".join(sos))
+                            break
+                        else:
+                            self.dict_sos[player].append(jugada)
+                            complete.append("".join(sos))
+                            break
                     sos = []  # Reiniciar la lista sos
             fila += 1
+
+            print(complete,player)
 
         return complete, player
 
 
 
-''''
-board = Board(3)
-print(board.create_board())
-board.insert_piece(0,0,'S','red')
-board.computer_move()
-print(board.get_board())
-
-board.insert_piece(2,2,'S','red')
-board.computer_move()
-print(board.get_board())
-
-
-
-
+'''
 
     def win_or_tie_general(self,row,col):
         if self.board_empty():
@@ -303,8 +308,24 @@ print(f'{state}\n{player}\n')
 print(board.dict_sos)
 print('\n')
 
-#segunda ronda
+
+
+board = Board(4)
+
+board.insert_piece(0,0,'S','blue')
+board.insert_piece(0,1,'O','red')
 board.insert_piece(0,2,'S','blue')
+print(board.get_board())
+board.complete_SOS_general(0,2)
+print(board.dict_sos)
+
+
+
+#segunda ronda
+
+
+
+
 board.insert_piece(2,2,'S','red')
 print(board.get_board())
 board.complete_SOS_general(2,2)
@@ -323,4 +344,4 @@ board.insert_piece(0,1,'S','red')
 print(board.get_board())
 board.complete_SOS_general(0,1)
 print(board.dict_sos)
-'''
+'''''
