@@ -96,3 +96,37 @@ Comenzamos creando la clase ControladorBase de la siguiente forma
  index: Es el metodo que realiza la solicitud get a la ruta "/api". El cual devuelve el texto "index"
  
 
+Corremos el codigo principal 
+
+![Alt text](imagenes/p3/5.png)
+
+Ahora ingresamos a http://localhost:8080/ y nos deberia aparecer el texto "index"
+
+![Alt text](imagenes/p3/6.png)
+
+Ahora generamos un nuevo proyecto agregando la dependencia Mustache
+
+![Alt text](imagenes/p3/7.png)
+
+Abrimos el archivo en intellij y nos fijamos las dependencias en el pom.xml
+
+![Alt text](imagenes/p3/8.png)
+
+## parte 2
+
+Creamos el archivo index.mustache en el apartado de /templates del proyecto
+
+![Alt text](imagenes/p3/9.png)
+
+Luego procedemos a correr el proyecto 
+
+![Alt text](imagenes/p3/10.png)
+
+Ingresamos a http://localhost:8080/ nuevamente y se debe mostrar la plantilla creada
+
+![Alt text](imagenes/p3/11.png)
+
+
+
+
+
