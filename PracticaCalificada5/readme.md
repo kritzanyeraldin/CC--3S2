@@ -23,12 +23,12 @@ Si ingresamos a http://localhost:8080/ nos muestra lo siguiente
 
 ![Texto alternativo](imagenes/p2/4.png)
 
-a
+Ahora creamos un contenedor con l aimagen creada con volumen 
 
 ![Texto alternativo](imagenes/p2/5.png)
 ![Texto alternativo](imagenes/p2/6.png)
 
-a
+y si quisieramos saber lo que contiene la etiqueta config.label ejecutamos docker inspect
 
 ![Texto alternativo](imagenes/p2/7.png)
 
