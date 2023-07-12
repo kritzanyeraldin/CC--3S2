@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jetty.mortbay.plus" type="repository">
+    <properties maven-id="jetty:org.mortbay.jetty.plus:5.1.5rc1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/jetty/org.mortbay.jetty.plus/5.1.5rc1/org.mortbay.jetty.plus-5.1.5rc1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
