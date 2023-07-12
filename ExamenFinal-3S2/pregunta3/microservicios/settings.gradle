@@ -1,0 +1,1 @@
+include ':microservicios:product-service', ':microservicios:review-service', ':microservicios:recommendation-service', ':microservicios:product-composite-service'
